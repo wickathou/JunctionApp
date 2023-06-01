@@ -9,5 +9,5 @@ services:
     ports:
       - 27011:27017
     volumes:
-      - ./dump:/data/db
+      - ../dump:/data/db/javier_dump
     restart: unless-stopped
