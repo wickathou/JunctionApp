@@ -212,35 +212,6 @@ const junctionStyle = makeStyles({
     displayGrid: {
         display: 'grid',
     },
-    gridTemplateColumns: columnCount => ({
-        gridTemplateColumns: `repeat(${columnCount}, 1fr)`,
-    }),
-    // @ts-ignore
-    gridColumnStart: start => ({
-        gridColumnStart: start,
-    }),
-    // @ts-ignore
-    gridColumnEnd: end => ({
-        gridColumnEnd: end,
-    }),
-    gridColumnSpan: span => ({
-        gridColumn: `span ${span}`,
-    }),
-    gridGap: gap => ({
-        // @ts-ignore
-        gridGap: theme.spacing(gap),
-    }),
-    // @ts-ignore
-    gridRowStart: start => ({
-        gridRowStart: start,
-    }),
-    // @ts-ignore
-    gridRowEnd: end => ({
-        gridRowEnd: end,
-    }),
-    gridRowSpan: span => ({
-        gridRow: `span ${span}`,
-    }),
     gridAutoFlowRow: {
         gridAutoFlow: 'row',
     },
@@ -274,6 +245,59 @@ const junctionStyle = makeStyles({
     gridAlignItemsStretch: {
         alignItems: 'stretch',
     },
+    gridJustifyContentStart: {
+        justifyContent: 'start',
+    },
+    gridJustifyContentEnd: {
+        justifyContent: 'end',
+    },
+    gridJustifyContentCenter: {
+        justifyContent: 'center',
+    },
+    gridJustifyContentSpaceBetween: {
+        justifyContent: 'space-between',
+    },
+    gridJustifyContentSpaceAround: {
+        justifyContent: 'space-around',
+    },
+    gridJustifyContentSpaceEvenly: {
+        justifyContent: 'space-evenly',
+    },
+    gridJustifyContentStretch: {
+        justifyContent: 'stretch',
+    },
+    gridTemplateColumns: props => ({
+        // @ts-ignore
+        gridTemplateColumns: props.columns,
+    }),
+    gridColumnStart: props => ({
+        // @ts-ignore
+        gridColumnStart: props.start,
+    }),
+    gridColumnEnd: props => ({
+        // @ts-ignore
+        gridColumnEnd: props.end,
+    }),
+    gridColumnSpan: props => ({
+        // @ts-ignore
+        gridColumn: `span ${props.span}`,
+    }),
+    gridGap: props => ({
+        // @ts-ignore
+        gridGap: theme.spacing(props.gap),
+    }),
+    gridRowStart: props => ({
+        // @ts-ignore
+        gridRowStart: props.start,
+    }),
+    gridRowEnd: props => ({
+        // @ts-ignore
+        gridRowEnd: props.end,
+    }),
+    gridRowSpan: props => ({
+        // @ts-ignore
+        gridRow: `span ${props.span}`,
+    }),
 })
 
 export default junctionStyle
