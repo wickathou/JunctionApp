@@ -44,7 +44,6 @@ export default () => {
                         />
                     </div>
                 ))}
-
             </PageWrapper>
         </>
     )

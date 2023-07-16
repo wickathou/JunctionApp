@@ -68,7 +68,6 @@ export default () => {
                 {hackerpack.map(company => (
                     <HackerpackDetail partner={company} redeemable={true} />
                 ))}
-
             </PageWrapper>
         </>
     )

@@ -126,7 +126,6 @@ export default ({ value, onChange }) => {
         // && end > start
     }, [end, start])
 
-
     const minutesOptions = [
         { value: 0, label: '00' },
         { value: 30, label: '30' },

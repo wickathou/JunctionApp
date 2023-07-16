@@ -89,7 +89,7 @@ export default () => {
         } else {
             setFilteredLeft(left)
         }
-    }, [debouncedFilter, left])
+    }, [debouncedFilter, left, projects])
 
     const handleToggle = value => () => {
         const currentIndex = checked.indexOf(value)

@@ -26,7 +26,7 @@ export const pushNextRoute = () => (dispatch, getState) => {
 }
 
 export const logout = () => dispatch => {
-    console.log("action: logout")
+    console.log('action: logout')
     Auth0Service.logout()
 }
 
@@ -48,16 +48,15 @@ export const setSession = authResult => dispatch => {
     })
 }
 
-
 export const renewSession = () => dispatch => {
-    console.log("renewing the session...", Auth0Service.checkSession())
+    console.log('renewing the session...', Auth0Service.checkSession())
     return Auth0Service.checkSession()
         .then(authResult => {
-            console.log("authResult",authResult)
+            console.log('authResult', authResult)
             dispatch(setSession(authResult))
-            console.log("done setting session")
+            console.log('done setting session')
             dispatch(UserActions.updateUserProfile(authResult.idToken))
-            console.log("renewing done with result",authResult)
+            console.log('renewing done with result', authResult)
         })
         .catch(err => {
             console.log('error in renewSession')

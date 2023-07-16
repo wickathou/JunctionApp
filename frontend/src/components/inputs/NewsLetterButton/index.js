@@ -57,7 +57,7 @@ const NewsLetterButton = ({
         if (hidden) {
             onHidden()
         }
-    }, [hidden])
+    }, [hidden, onHidden])
 
     return (
         <motion.div

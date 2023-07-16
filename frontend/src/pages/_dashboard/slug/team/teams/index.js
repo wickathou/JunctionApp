@@ -57,7 +57,7 @@ export default () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(DashboardActions.updateTeams(slug))
-    }, [])
+    }, [dispatch, slug])
     const event = useSelector(DashboardSelectors.event)
     const teams = useSelector(DashboardSelectors.teams)
     const selectedTeam = useSelector(DashboardSelectors.selectedTeam)

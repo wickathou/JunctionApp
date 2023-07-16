@@ -5,14 +5,15 @@ import React from 'react'
 import { popupCenter } from 'utils/misc'
 import junctionStyle from 'utils/styles'
 
-export default ({ viewMode = '' }) => {
+export default ({ viewMode = '', data }) => {
     const classes = junctionStyle()
 
     const styling = {
         displayHeader: true,
         alignment: '',
     }
-
+    {
+    }
     switch (viewMode) {
         case 'team':
             styling.displayHeader = true
@@ -24,6 +25,13 @@ export default ({ viewMode = '' }) => {
         default:
             break
     }
+
+    const icons = [
+        data.github && { name: 'github', link: data.github },
+        data.linkedin && { name: 'github', link: data.linkedin },
+        data.slack && { name: 'github', link: data.slack },
+        data.discord && { name: 'github', link: data.discord },
+    ]
 
     return (
         <div className={`tw-flex tw-flex-col tw-gap-4 ${styling.alignment}`}>

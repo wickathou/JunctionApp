@@ -9,9 +9,7 @@ import GradientBox from 'components/generic/GradientBox'
 import { Grid, Typography } from '@material-ui/core'
 
 export default () => {
-
-
-return (
+    return (
         <>
             {/* button for DEV to swithc between participant / partner view */}
             {/* <Button
@@ -20,10 +18,14 @@ return (
                 variant="contained"
             >
                 Switch between participant / partner view (only for dev)
-            </Button> */
-            }
+            </Button> */}
             <div className="recruitment">
-                <iframe src="/recruitment" width='100%;' height='1500;' frameborder='0'></iframe>
+                <iframe
+                    src="/recruitment"
+                    width="100%;"
+                    height="1500;"
+                    frameborder="0"
+                ></iframe>
             </div>
         </>
     )

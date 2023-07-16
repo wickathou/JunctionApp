@@ -35,7 +35,7 @@ export default () => {
         if (idToken && event?.slug) {
             refreshTokens()
         }
-    }, [ event?.slug,idToken])
+    }, [event.slug, idToken, refreshTokens])
 
     const refreshTokens = useCallback(() => {
         if (idToken && event?.slug) {
@@ -45,7 +45,7 @@ export default () => {
                 },
             )
         }
-    }, [event?.slug,idToken])
+    }, [event.slug, idToken])
 
     const handleSubmit = useCallback(
         (values, formikBag) => {
@@ -70,28 +70,34 @@ export default () => {
                     formikBag.setSubmitting(false)
                 })
         },
-        [dispatch, idToken, event?.slug],
+        [dispatch, event.slug, idToken, refreshTokens],
     )
 
-    const onRevokeClicked = useCallback(tokenId => {
-        VotingTokenService.revokeVotingToken(idToken, event.slug, tokenId)
-            .then(() => {
-                dispatch(SnackbarActions.success('Token revoked!'))
-                refreshTokens()
-            })
-            .catch(err => {
-                dispatch(
-                    SnackbarActions.error(
-                        'Something went wrong... Please try again',
-                    ),
-                )
-            })
-    }, [])
+    const onRevokeClicked = useCallback(
+        tokenId => {
+            VotingTokenService.revokeVotingToken(idToken, event.slug, tokenId)
+                .then(() => {
+                    dispatch(SnackbarActions.success('Token revoked!'))
+                    refreshTokens()
+                })
+                .catch(err => {
+                    dispatch(
+                        SnackbarActions.error(
+                            'Something went wrong... Please try again',
+                        ),
+                    )
+                })
+        },
+        [dispatch, event.slug, idToken, refreshTokens],
+    )
 
-    const onCopyLinkClicked = useCallback(tokenId => {
-        navigator.clipboard.writeText(generateTokenLink(tokenId))
-        dispatch(SnackbarActions.success('Link copied to clipboard!'))
-    }, [])
+    const onCopyLinkClicked = useCallback(
+        tokenId => {
+            navigator.clipboard.writeText(generateTokenLink(tokenId))
+            dispatch(SnackbarActions.success('Link copied to clipboard!'))
+        },
+        [dispatch, generateTokenLink],
+    )
 
     const generateTokenLink = tokenId => {
         return `${window.origin}/events/${event?.slug}/finalist-voting/?votingToken=${tokenId}`

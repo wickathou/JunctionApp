@@ -94,7 +94,14 @@ export default () => {
 
     useEffect(() => {
         fetchData()
-    }, [idToken, event.slug, projects, rankingsOverall, rankingsByTrack])
+    }, [
+        idToken,
+        event.slug,
+        projects,
+        rankingsOverall,
+        rankingsByTrack,
+        fetchData,
+    ])
     console.log('ProjectRanks', ProjectRanks)
 
     return (

@@ -57,7 +57,7 @@ export default () => {
             .finally(() => {
                 setLoading(false)
             })
-    }, [event.slug, team?.code, dispatch])
+    }, [dispatch, event.slug, team.code])
 
     const handleDelete = useCallback(() => {
         setLoading(true)
@@ -76,7 +76,7 @@ export default () => {
                 setStatus('')
                 setLoading(false)
             })
-    }, [dispatch, event.slug, team?.code])
+    }, [dispatch, event.slug, team.code])
 
     const handleCreate = useCallback(
         (values, formikBag) => {

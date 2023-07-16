@@ -50,7 +50,7 @@ export default () => {
                                         onChange={value => {
                                             form.setFieldValue(
                                                 field.name,
-                                                value
+                                                value,
                                             )
                                         }}
                                     />
