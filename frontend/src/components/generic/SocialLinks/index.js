@@ -27,10 +27,10 @@ export default ({ viewMode = '', data }) => {
     }
 
     const icons = [
-        data.github && { name: 'github', link: data.github },
-        data.linkedin && { name: 'github', link: data.linkedin },
-        data.slack && { name: 'github', link: data.slack },
-        data.discord && { name: 'github', link: data.discord },
+        data.github && { name: ['fab', 'github'], link: data.github },
+        data.linkedin && { name: ['fab', 'linkedin'], link: data.linkedin },
+        data.slack && { name: ['fab', 'slack'], link: data.slack },
+        data.discord && { name: ['fab', 'discord'], link: data.discord },
     ]
 
     return (
@@ -45,39 +45,14 @@ export default ({ viewMode = '', data }) => {
                 </Typography>
             )}
             <div className="tw-flex tw-items-center">
-                <FontAwesomeIcon
-                    icon={['fab', 'telegram']}
-                    onClick={() =>
-                        popupCenter({
-                            url: `https://google.com`,
-                            title: 'test',
-                        })
-                    }
-                    className={classes.socialIcon}
-                    size="2x"
-                />
-                <FontAwesomeIcon
-                    icon={['fab', 'discord']}
-                    onClick={() =>
-                        popupCenter({
-                            url: `https://google.com`,
-                            title: 'test',
-                        })
-                    }
-                    className={classes.socialIcon}
-                    size="2x"
-                />
-                <FontAwesomeIcon
-                    icon={['fab', 'slack']}
-                    onClick={() =>
-                        popupCenter({
-                            url: `https://google.com`,
-                            title: 'test',
-                        })
-                    }
-                    className={classes.socialIcon}
-                    size="2x"
-                />
+                {icons.map(icon => (
+                    <FontAwesomeIcon
+                        icon={icon.name}
+                        onClick={() => window.open(icon.link, '_blank')}
+                        className={classes.socialIcon}
+                        size="2x"
+                    />
+                ))}
                 <IconButton
                     color="primary"
                     aria-label="Email"
