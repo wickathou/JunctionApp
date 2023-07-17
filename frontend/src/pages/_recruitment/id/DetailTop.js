@@ -164,8 +164,23 @@ export default ({ user = {} }) => {
                         </Typography>
                     </div>
 
-                    {/* <SocialLinks viewMode="participant" /> */}
-                    <div className="tw-flex tw-content-center tw-justify-start">
+                    <SocialLinks viewMode="participant" data={social} />
+                    {profile.email && (
+                        <IconButton
+                            color="primary"
+                            aria-label="Email"
+                            className="tw-p-0"
+                            onClick={() =>
+                                popupCenter({
+                                    url: `mailto:${profile.email}`,
+                                    title: 'email',
+                                })
+                            }
+                        >
+                            <Email className={classes.socialIcon} />
+                        </IconButton>
+                    )}
+                    {/* <div className="tw-flex tw-content-center tw-justify-start">
                         {social.github && (
                             <Tooltip title="GitHub" placement="bottom">
                                 <Box p={1}>
@@ -226,6 +241,7 @@ export default ({ user = {} }) => {
                                 </Box>
                             </Tooltip>
                         )}
+
                         {profile.email && (
                             <IconButton
                                 color="primary"
@@ -241,7 +257,7 @@ export default ({ user = {} }) => {
                                 <Email className={classes.socialIcon} />
                             </IconButton>
                         )}
-                    </div>
+                    </div> */}
 
                     {/* <div className="tw-flex tw-gap-4 tw-justify-start">
                         <Button variant="jContained">Messages</Button>

@@ -2,10 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconButton, Typography } from '@material-ui/core'
 import { Email } from '@material-ui/icons'
 import React from 'react'
-import { popupCenter } from 'utils/misc'
 import junctionStyle from 'utils/styles'
 
-export default ({ viewMode = '', data }) => {
+export default ({ viewMode = '', social, profile = {} }) => {
     const classes = junctionStyle()
 
     const styling = {
@@ -27,10 +26,14 @@ export default ({ viewMode = '', data }) => {
     }
 
     const icons = [
-        data.github && { name: ['fab', 'github'], link: data.github },
-        data.linkedin && { name: ['fab', 'linkedin'], link: data.linkedin },
-        data.slack && { name: ['fab', 'slack'], link: data.slack },
-        data.discord && { name: ['fab', 'discord'], link: data.discord },
+        social.github && { name: ['fab', 'github'], link: social.github },
+        social.linkedin && { name: ['fab', 'linkedin'], link: social.linkedin },
+        social.slack && { name: ['fab', 'slack'], link: social.slack },
+        social.discord && { name: ['fab', 'discord'], link: social.discord },
+        social.portfolio && {
+            name: ['fab', 'briefcase'],
+            link: social.portfolio,
+        },
     ]
 
     return (
@@ -45,21 +48,18 @@ export default ({ viewMode = '', data }) => {
                 </Typography>
             )}
             <div className="tw-flex tw-items-center">
-                {icons.map(icon => (
-                    <FontAwesomeIcon
-                        icon={icon.name}
-                        onClick={() => window.open(icon.link, '_blank')}
-                        className={classes.socialIcon}
-                        size="2x"
-                    />
-                ))}
-                <IconButton
-                    color="primary"
-                    aria-label="Email"
-                    className="tw-p-0"
-                >
-                    <Email className={classes.socialIcon} />
-                </IconButton>
+                {icons.map(
+                    icon =>
+                        icon && (
+                            <FontAwesomeIcon
+                                icon={icon.name}
+                                onClick={() => window.open(icon.link, '_blank')}
+                                className={classes.socialIcon}
+                                size="2x"
+                                key={icon.name}
+                            />
+                        ),
+                )}
             </div>
         </div>
     )
