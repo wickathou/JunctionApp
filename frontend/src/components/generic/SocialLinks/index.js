@@ -31,16 +31,19 @@ export default ({ viewMode = '', social, profile = {} }) => {
             break
     }
 
-    const icons = [
-        social.github && { name: faGithub, link: social.github },
-        social.linkedin && { name: faLinkedin, link: social.linkedin },
-        social.slack && { name: faDiscord, link: social.slack },
-        social.discord && { name: faSlack, link: social.discord },
+    const socials = [
+        social.github && { icon: faGithub, link: social.github },
+        social.linkedin && { icon: faLinkedin, link: social.linkedin },
+        social.slack && { icon: faDiscord, link: social.slack },
+        social.discord && { icon: faSlack, link: social.discord },
         social.portfolio && {
-            name: faBriefcase,
+            icon: faBriefcase,
             link: social.portfolio,
         },
-        profile.email && { name: faEnvelope, link: `mailto:${profile.email}` },
+        profile.email && {
+            icon: faEnvelope,
+            link: `https://mail.google.com/mail/?view=cm&to=${profile.email}`,
+        },
     ]
 
     return (
@@ -55,14 +58,14 @@ export default ({ viewMode = '', social, profile = {} }) => {
                 </Typography>
             )}
             <ul className="tw-flex tw-items-center tw-list-none tw-pl-0">
-                {icons.map(
-                    icon =>
-                        icon && (
-                            <li key={icon.name}>
+                {socials.map(
+                    social =>
+                        social && (
+                            <li key={social.icon}>
                                 <FontAwesomeIcon
-                                    icon={icon.name}
+                                    icon={social.icon}
                                     onClick={() =>
-                                        window.open(icon.link, '_blank')
+                                        window.open(social.link, '_blank')
                                     }
                                     className={classes.socialIcon}
                                     size="2x"
