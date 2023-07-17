@@ -1,8 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconButton, Typography } from '@material-ui/core'
-import { Email } from '@material-ui/icons'
+import { Typography } from '@material-ui/core'
 import React from 'react'
 import junctionStyle from 'utils/styles'
+import { faBriefcase, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import {
+    faGithub,
+    faLinkedin,
+    faDiscord,
+    faSlack,
+} from '@fortawesome/free-brands-svg-icons'
 
 export default ({ viewMode = '', social, profile = {} }) => {
     const classes = junctionStyle()
@@ -26,14 +32,15 @@ export default ({ viewMode = '', social, profile = {} }) => {
     }
 
     const icons = [
-        social.github && { name: ['fab', 'github'], link: social.github },
-        social.linkedin && { name: ['fab', 'linkedin'], link: social.linkedin },
-        social.slack && { name: ['fab', 'slack'], link: social.slack },
-        social.discord && { name: ['fab', 'discord'], link: social.discord },
+        social.github && { name: faGithub, link: social.github },
+        social.linkedin && { name: faLinkedin, link: social.linkedin },
+        social.slack && { name: faDiscord, link: social.slack },
+        social.discord && { name: faSlack, link: social.discord },
         social.portfolio && {
-            name: ['fab', 'briefcase'],
+            name: faBriefcase,
             link: social.portfolio,
         },
+        profile.email && { name: faEnvelope, link: `mailto:${profile.email}` },
     ]
 
     return (
@@ -47,20 +54,23 @@ export default ({ viewMode = '', social, profile = {} }) => {
                     Connect with us
                 </Typography>
             )}
-            <div className="tw-flex tw-items-center">
+            <ul className="tw-flex tw-items-center tw-list-none tw-pl-0">
                 {icons.map(
                     icon =>
                         icon && (
-                            <FontAwesomeIcon
-                                icon={icon.name}
-                                onClick={() => window.open(icon.link, '_blank')}
-                                className={classes.socialIcon}
-                                size="2x"
-                                key={icon.name}
-                            />
+                            <li key={icon.name}>
+                                <FontAwesomeIcon
+                                    icon={icon.name}
+                                    onClick={() =>
+                                        window.open(icon.link, '_blank')
+                                    }
+                                    className={classes.socialIcon}
+                                    size="2x"
+                                />
+                            </li>
                         ),
                 )}
-            </div>
+            </ul>
         </div>
     )
 }
