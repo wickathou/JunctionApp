@@ -164,11 +164,7 @@ export default ({ user = {} }) => {
                         </Typography>
                     </div>
 
-                    <SocialLinks
-                        viewMode="participant"
-                        social={social}
-                        profile={profile}
-                    />
+                    <SocialLinks social={social} email={profile.email} />
 
                     {/* <div className="tw-flex tw-gap-4 tw-justify-start">
                         <Button variant="jContained">Messages</Button>

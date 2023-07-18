@@ -1,3 +1,5 @@
+// @ts-nocheck
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -8,7 +10,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 import junctionStyle from 'utils/styles'
 
-const SocialIcons = ({ social, profile = {} }) => {
+const SocialIcons = ({ social, email = null }) => {
     const classes = junctionStyle()
 
     const socials = [
@@ -20,14 +22,14 @@ const SocialIcons = ({ social, profile = {} }) => {
             icon: faBriefcase,
             link: social.portfolio,
         },
-        profile.email && {
+        email && {
             icon: faEnvelope,
-            link: `https://mail.google.com/mail/?view=cm&to=${profile.email}`,
+            link: `https://mail.google.com/mail/?view=cm&to=${email}`,
         },
     ]
 
     return (
-        <ul className="tw-flex tw-items-center tw-list-none tw-pl-0">
+        <ul className="tw-flex tw-gap-5 tw-items-center tw-list-none tw-pl-0">
             {socials.map(
                 social =>
                     social && (
@@ -37,7 +39,7 @@ const SocialIcons = ({ social, profile = {} }) => {
                                 onClick={() =>
                                     window.open(social.link, '_blank')
                                 }
-                                className={classes.socialIcon}
+                                className={`tw-m-0 ${classes.socialIcon}`}
                                 size="2x"
                             />
                         </li>
