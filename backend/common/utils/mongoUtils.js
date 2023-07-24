@@ -13,7 +13,11 @@ const MongoUtils = {
                     return MongoUtils.ensureObjectId(field)
                 })
             }
-        } else if (value.length === 24 && mongodb.ObjectID.isValid(value)) {
+        } else if (
+            value &&
+            value.length === 24 &&
+            mongodb.ObjectID.isValid(value)
+        ) {
             return mongoose.Types.ObjectId(value)
         }
         return value
