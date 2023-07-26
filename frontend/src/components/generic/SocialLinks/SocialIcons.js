@@ -8,6 +8,7 @@ import {
     faSlack,
 } from '@fortawesome/free-brands-svg-icons'
 import junctionStyle from 'utils/styles'
+import { popupCenter } from 'utils/misc'
 
 const SocialIcons = ({ social, email = null }) => {
     const classes = junctionStyle()
@@ -23,7 +24,7 @@ const SocialIcons = ({ social, email = null }) => {
         },
         email && {
             icon: faEnvelope,
-            link: `https://mail.google.com/mail/?view=cm&to=${email}`,
+            link: `mailto:${email}`,
         },
     ]
 
@@ -35,9 +36,16 @@ const SocialIcons = ({ social, email = null }) => {
                         <li key={social.icon}>
                             <FontAwesomeIcon
                                 icon={social.icon}
-                                onClick={() =>
-                                    window.open(social.link, '_blank')
-                                }
+                                onClick={() => {
+                                    if (social.link.startsWith('mailto:')) {
+                                        popupCenter({
+                                            url: social.link,
+                                            title: 'email',
+                                        })
+                                    } else {
+                                        window.open(social.link, '_blank')
+                                    }
+                                }}
                                 className={`tw-m-0 ${classes.socialIcon}`}
                                 size="2x"
                             />
