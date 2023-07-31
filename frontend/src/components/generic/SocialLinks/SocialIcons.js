@@ -6,6 +6,8 @@ import {
     faLinkedin,
     faDiscord,
     faSlack,
+    faTelegram,
+    faSkype,
 } from '@fortawesome/free-brands-svg-icons'
 import junctionStyle from 'utils/styles'
 import { popupCenter } from 'utils/misc'
@@ -16,8 +18,10 @@ const SocialIcons = ({ social, email = null }) => {
     const socials = [
         social.github && { icon: faGithub, link: social.github },
         social.linkedin && { icon: faLinkedin, link: social.linkedin },
-        social.slack && { icon: faDiscord, link: social.slack },
-        social.discord && { icon: faSlack, link: social.discord },
+        social.slack && { icon: faSlack, link: social.slack },
+        social.discord && { icon: faDiscord, link: social.discord },
+        social.telegram && { icon: faTelegram, link: social.discord },
+        social.skype && { icon: faSkype, link: social.discord },
         social.portfolio && {
             icon: faBriefcase,
             link: social.portfolio,
@@ -43,7 +47,8 @@ const SocialIcons = ({ social, email = null }) => {
                                             title: 'email',
                                         })
                                     } else {
-                                        window.open(social.link, '_blank')
+                                        let socialLink = social.link.startsWith('http') ? social.link : "http://" + social.link;
+                                        window.open(socialLink, '_blank')
                                     }
                                 }}
                                 className={`tw-m-0 ${classes.socialIcon}`}

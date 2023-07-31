@@ -172,7 +172,10 @@ export default ({ user = {} }) => {
                         </div>
                     )}
 
-                    <SocialLinks social={social} email={profile.email} />
+                    <SocialLinks
+                        social={{ discord: 'discord.com' }}
+                        email={profile.email}
+                    />
 
                     {/* <div className="tw-flex tw-gap-4 tw-justify-start">
                         <Button variant="jContained">Messages</Button>
