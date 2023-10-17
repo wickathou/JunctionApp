@@ -1,83 +1,26 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconButton, Typography } from '@material-ui/core'
-import { Email } from '@material-ui/icons'
+import { Typography } from '@material-ui/core'
 import React from 'react'
-import { popupCenter } from 'utils/misc'
-import junctionStyle from 'utils/styles'
+import SocialIcons from './SocialIcons'
 
-export default ({ viewMode = '' }) => {
-    const classes = junctionStyle()
-
-    const styling = {
-        displayHeader: true,
-        alignment: '',
-    }
-
-    switch (viewMode) {
-        case 'team':
-            styling.displayHeader = true
-            break
-        case 'participant':
-            styling.displayHeader = false
-            styling.alignment = 'tw--ml-4'
-            break
-        default:
-            break
-    }
-
+export default ({
+    social,
+    email = '',
+    displayHeader = false,
+    headerText = 'Connect with us',
+}) => {
     return (
-        <div className={`tw-flex tw-flex-col tw-gap-4 ${styling.alignment}`}>
-            {styling.displayHeader && (
+        <div className={`tw-flex tw-flex-col tw-gap-4`}>
+            {displayHeader && (
                 <Typography
                     className="tw-tracking-tight tw-font-medium"
                     variant="h5"
                     component="h5"
                 >
-                    Connect with us
+                    {headerText}
                 </Typography>
             )}
-            <div className="tw-flex tw-items-center">
-                <FontAwesomeIcon
-                    icon={['fab', 'telegram']}
-                    onClick={() =>
-                        popupCenter({
-                            url: `https://google.com`,
-                            title: 'test',
-                        })
-                    }
-                    className={classes.socialIcon}
-                    size="2x"
-                />
-                <FontAwesomeIcon
-                    icon={['fab', 'discord']}
-                    onClick={() =>
-                        popupCenter({
-                            url: `https://google.com`,
-                            title: 'test',
-                        })
-                    }
-                    className={classes.socialIcon}
-                    size="2x"
-                />
-                <FontAwesomeIcon
-                    icon={['fab', 'slack']}
-                    onClick={() =>
-                        popupCenter({
-                            url: `https://google.com`,
-                            title: 'test',
-                        })
-                    }
-                    className={classes.socialIcon}
-                    size="2x"
-                />
-                <IconButton
-                    color="primary"
-                    aria-label="Email"
-                    className="tw-p-0"
-                >
-                    <Email className={classes.socialIcon} />
-                </IconButton>
-            </div>
+
+            <SocialIcons social={social} email={email} />
         </div>
     )
 }

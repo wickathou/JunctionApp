@@ -172,89 +172,10 @@ export default ({ user = {} }) => {
                         </div>
                     )}
 
-                    {/* <SocialLinks viewMode="participant" /> */}
-                    {(profile.email || !_.isEmpty(social)) && (
-                        <div className="tw-flex tw-content-center tw-justify-start">
-                            {social.github && (
-                                <Tooltip title="GitHub" placement="bottom">
-                                    <Box p={1}>
-                                        <IconButton
-                                            onClick={() =>
-                                                window.open(
-                                                    social.github,
-                                                    '_blank',
-                                                )
-                                            }
-                                            aria-label="github"
-                                            className={classes.githubIcon}
-                                        >
-                                            <GitHubIcon
-                                                className={classes.icon}
-                                                fontSize="small"
-                                            />
-                                        </IconButton>
-                                    </Box>
-                                </Tooltip>
-                            )}
-                            {social.linkedin && (
-                                <Tooltip title="LinkedIn" placement="bottom">
-                                    <Box p={1}>
-                                        <IconButton
-                                            onClick={() =>
-                                                window.open(
-                                                    social.linkedin,
-                                                    '_blank',
-                                                )
-                                            }
-                                            aria-label="linkedin"
-                                            className={classes.linkedinIcon}
-                                        >
-                                            <LinkedInIcon
-                                                className={classes.icon}
-                                                fontSize="small"
-                                            />
-                                        </IconButton>
-                                    </Box>
-                                </Tooltip>
-                            )}
-                            {social.portfolio && (
-                                <Tooltip title="Portfolio" placement="bottom">
-                                    <Box p={1}>
-                                        <IconButton
-                                            onClick={() =>
-                                                window.open(
-                                                    social.portfolio,
-                                                    '_blank',
-                                                )
-                                            }
-                                            aria-label="portfolio"
-                                            className={classes.portfolioIcon}
-                                        >
-                                            <BrushIcon
-                                                className={classes.icon}
-                                                fontSize="small"
-                                            />
-                                        </IconButton>
-                                    </Box>
-                                </Tooltip>
-                            )}
-                            {profile.email && (
-                                <IconButton
-                                    color="primary"
-                                    aria-label="Email"
-                                    className="tw-p-0"
-                                    onClick={() =>
-                                        popupCenter({
-                                            url: `mailto:${profile.email}`,
-                                            title: 'email',
-                                        })
-                                    }
-                                >
-                                    <Email className={classes.socialIcon} />
-                                </IconButton>
-                            )}
-                        </div>
-                    )}
+                    <SocialLinks
+                        social={{ discord: 'discord.com' }}
+                        email={profile.email}
+                    />
 
                     {/* <div className="tw-flex tw-gap-4 tw-justify-start">
                         <Button variant="jContained">Messages</Button>
