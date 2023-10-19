@@ -447,6 +447,9 @@ const RegistrationQuestion = ({
                     </FormControl>
                 )
             case 'boolean': {
+                if (field.value === undefined || field.value === null) {
+                    form.setFieldValue(field.name, config.settings.default)
+                }
                 return (
                     <FormControl
                         label={config.label}
@@ -533,6 +536,7 @@ const RegistrationQuestion = ({
                             handleChange={value =>
                                 form.setFieldValue(field.name, value)
                             }
+                            config={config}
                         />
                     </FormControl>
                 )

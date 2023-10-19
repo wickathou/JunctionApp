@@ -48,12 +48,12 @@ const SubmissionForm = props => {
     const [project, setProject] = useState(null)
     const [projectStatus, setProjectStatus] = useState('')
 
-    const [projectName, setProjectName] = useState(project?.name || '')
-    const debouncedProjectName = useDebounce(projectName, 300)
-    const [projectValidity, setProjectValidity] = useState({
-        errors: {},
-        state: 'initial',
-    })
+    // const [projectName, setProjectName] = useState(project?.name || '')
+    // const debouncedProjectName = useDebounce(projectName, 300)
+    // const [projectValidity, setProjectValidity] = useState({
+    //     errors: {},
+    //     state: 'initial',
+    // })
 
     useEffect(() => {
         if (projects && projects.length && id) {
@@ -65,39 +65,39 @@ const SubmissionForm = props => {
         }
     }, [id, projects])
 
-    useEffect(() => {
-        setProjectValidity({
-            errors: {},
-            state: 'initial',
-        })
+    // useEffect(() => {
+    //     setProjectValidity({
+    //         errors: {},
+    //         state: 'initial',
+    //     })
 
-        if (debouncedProjectName && debouncedProjectName === project?.name)
-            return
+    //     if (debouncedProjectName && debouncedProjectName === project?.name)
+    //         return
 
-        validateProject()
-    }, [debouncedProjectName])
+    //     validateProject()
+    // }, [debouncedProjectName])
 
-    const validateProject = async () => {
-        setProjectValidity({
-            errors: {},
-            state: 'loading',
-        })
-        const result = await ProjectsService.validateProject(
-            idToken,
-            event.slug,
-            {
-                projectName: debouncedProjectName,
-            },
-        )
-        const errors = Object.entries(result)
-            .filter(([, isInvalid]) => !!isInvalid)
-            .reduce(
-                (acc, [key, isInvalid]) => ({ ...acc, [key]: isInvalid }),
-                {},
-            )
+    // const validateProject = async () => {
+    //     setProjectValidity({
+    //         errors: {},
+    //         state: 'loading',
+    //     })
+    //     const result = await ProjectsService.validateProject(
+    //         idToken,
+    //         event.slug,
+    //         {
+    //             projectName: debouncedProjectName,
+    //         },
+    //     )
+    //     const errors = Object.entries(result)
+    //         .filter(([, isInvalid]) => !!isInvalid)
+    //         .reduce(
+    //             (acc, [key, isInvalid]) => ({ ...acc, [key]: isInvalid }),
+    //             {},
+    //         )
 
-        setProjectValidity({ errors, state: 'loaded' })
-    }
+    //     setProjectValidity({ errors, state: 'loaded' })
+    // }
 
     const initialValues = {
         sourcePublic: true,
@@ -195,16 +195,6 @@ const SubmissionForm = props => {
         })
     }
 
-    // const fileTest = async () => {
-    //     return await dispatch(
-    //         DashboardActions.getFile('651188f0f66c7a6981df522a'),
-    //     )
-    // }
-
-    // const deleteTest = async () => {
-    //     await dispatch(DashboardActions.deleteFile('651188f0f66c7a6981df522a'))
-    // }
-
     const renderForm = formikProps => {
         if (projectLoading) {
             return <PageWrapper loading />
@@ -232,56 +222,7 @@ const SubmissionForm = props => {
                     <Grid container spacing={6}>
                         <Grid item xs={12}></Grid>
                         <NameField props={formikProps} />
-                        {/* <FastField
-                            name="coverImage"
-                            render={({ field, form }) => (
-                                <FormControl
-                                    label="Cover image"
-                                    hint="A cool cover image for your event. Max dimensions 1920x1080 (2MB), will be scaled down if larger."
-                                    error={form.errors[field.name]}
-                                    touched={form.touched[field.name]}
-                                >
-                                    <Box
-                                        width="100%"
-                                        pt="56.25%"
-                                        position="relative"
-                                    >
-                                        <ImageUpload
-                                            value={field.value}
-                                            onChange={value => {
-                                                form.setFieldValue(
-                                                    field.name,
-                                                    value,
-                                                )
-                                                form.setFieldTouched(field.name)
-                                            }}
-                                            uploadUrl={`/api/upload/files`}
-                                            resizeMode="cover"
-                                        />
-                                    </Box>
-                                </FormControl>
-                            )}
-                        /> */}
-                        {/* <button onClick={fileTest}>Download test</button>
-                        <button onClick={deleteTest}>Delete test</button> */}
 
-                        {/* <button onClick={() => console.log(formikProps.values)}>
-                            TEST
-                        </button> */}
-                        {/* <FastField
-                            name="files"
-                            render={({ field, form }) => (
-                                <FileInput
-                                    handleChange={e => {
-                                        form.setFieldValue(field.name, e)
-                                        console.log(
-                                            'From file input at subform',
-                                            e,
-                                        )
-                                    }}
-                                />
-                            )}
-                        /> */}
                         {renderDefaultFields(
                             event.submissionFormDefaultFields,
                             event.submissionFormEnabledFields,
@@ -308,17 +249,19 @@ const SubmissionForm = props => {
                             ))}
 
                         <StatusField props={formikProps} />
-                        <BottomBar
-                            onSubmit={() => {
-                                formikProps.submitForm()
-                                handleProjectSelected(undefined)
-                            }}
-                            errors={formikProps.errors}
-                            dirty={formikProps.dirty}
-                            loading={formikProps.isSubmitting}
-                        />
                     </Grid>
                 </Box>
+                <div className=" tw-mb-16" />
+                <BottomBar
+                    onSubmit={async () => {
+                        formikProps.submitForm().then(() => {
+                            handleProjectSelected(undefined)
+                        })
+                    }}
+                    errors={formikProps.errors}
+                    dirty={formikProps.dirty}
+                    loading={formikProps.isSubmitting}
+                />
             </Box>
         )
     }
@@ -334,47 +277,58 @@ const SubmissionForm = props => {
             }}
             onSubmit={async (values, actions) => {
                 actions.setSubmitting(true)
-                if (!values.privacy) {
-                    if (!values.hiddenMembers.includes(idTokenData.sub)) {
-                        values.hiddenMembers.push(idTokenData.sub)
+                try {
+                    if (!values.privacy) {
+                        if (!values.hiddenMembers.includes(idTokenData.sub)) {
+                            values.hiddenMembers.push(idTokenData.sub)
+                        }
+                    } else {
+                        const index = values.hiddenMembers.indexOf(
+                            idTokenData.sub,
+                        )
+                        if (index !== -1) values.hiddenMembers.splice(index, 1)
                     }
-                } else {
-                    const index = values.hiddenMembers.indexOf(idTokenData.sub)
-                    if (index !== -1) values.hiddenMembers.splice(index, 1)
-                }
-                let res
-                if (project) {
-                    res = await dispatch(
-                        DashboardActions.editProject(
-                            event.slug,
-                            valuesFormatter(values),
-                        ),
-                    )
-                } else {
-                    res = await dispatch(
-                        DashboardActions.createProject(
-                            event.slug,
-                            valuesFormatter(values),
-                        ),
-                    )
-                }
-
-                if (res.error) {
-                    const message =
-                        res?.payload?.response?.data?.message ??
-                        'Oops, something went wrong...'
+                    let res
+                    if (project) {
+                        res = await dispatch(
+                            DashboardActions.editProject(
+                                event.slug,
+                                valuesFormatter(values),
+                            ),
+                        )
+                    } else {
+                        res = await dispatch(
+                            DashboardActions.createProject(
+                                event.slug,
+                                valuesFormatter(values),
+                            ),
+                        )
+                    }
+                    if (res.error) {
+                        const message =
+                            res?.payload?.response?.data?.message ??
+                            'Oops, something went wrong...'
+                        dispatch(
+                            SnackbarActions.error(message, {
+                                autoHideDuration: 3000,
+                            }),
+                        )
+                    } else {
+                        dispatch(
+                            SnackbarActions.success(
+                                'Success! Project submission updated',
+                            ),
+                        )
+                    }
+                } catch (error) {
+                    console.error('An error occurred:', error)
                     dispatch(
-                        SnackbarActions.error(message, {
+                        SnackbarActions.error('Oops, something went wrong...', {
                             autoHideDuration: 3000,
                         }),
                     )
-                } else {
-                    dispatch(
-                        SnackbarActions.success(
-                            'Success! Project submission updated',
-                        ),
-                    )
                 }
+
                 actions.setSubmitting(false)
             }}
         >

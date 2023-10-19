@@ -25,12 +25,6 @@ const ProjectsGrid = ({
     showReviewers = false,
 }) => {
     const idToken = useSelector(AuthSelectors.getIdToken)
-    // const userAccessRight = useSelector(UserSelectors.userAccessRight)
-    // const isPartner = _.includes(userAccessRight, 'partner')
-    // if (!token && idToken && isPartner) {
-    //     console.log('No token provided')
-    //     token = idToken
-    // }
 
     const isOngoingEvent = EventHelpers.isEventOngoing(event, moment)
     const [sorted, setSorted] = useState(projects)
@@ -75,7 +69,7 @@ const ProjectsGrid = ({
     }, [event.slug, projects, token])
 
     useEffect(() => {
-        if (showScore) {
+        if (showScore || showReviewers) {
             fetchData()
         } else {
             setSorted(
@@ -87,7 +81,7 @@ const ProjectsGrid = ({
     return (
         <Grid
             container
-            spacing={3}
+            spacing={1}
             direction="row"
             alignItems="stretch"
             justify="center"
@@ -108,12 +102,13 @@ const ProjectsGrid = ({
                         project={project}
                         event={event}
                         showTableLocation={isOngoingEvent}
-                        showFullTeam={showFullTeam}
+                        // showFullTeam={showFullTeam}
                         onClickMore={() => onSelect(project)}
                         score={projectScore}
                         message={projectMessage}
                         showTags={showTags}
                         showReviewers={showReviewers}
+                        showScore={showScore}
                     />
                 )
             })}

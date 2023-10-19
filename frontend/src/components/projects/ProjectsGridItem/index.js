@@ -74,7 +74,7 @@ const ProjectsGridItem = ({
     message = null,
     showTags = false,
     showReviewers = false,
-    // onSeeReviews = () => {},
+    showScore = false,
 }) => {
     const [openReviewModal, setOpenReviewModal] = useState(false)
     const isVotingPast = EventHelpers.isVotingPast(event, moment)
@@ -119,8 +119,7 @@ const ProjectsGridItem = ({
     return (
         <Grid item xs={12} sm={6} md={4} style={{ display: 'flex' }}>
             <Card
-                // onClick={onClickMore}
-                className={`tw-bg-white tw-w-full tw-m-4 tw-text-left tw-rounded-lg tw-shadow-md tw-h-500px tw-flex tw-flex-col tw-justify-between`}
+                className={`tw-bg-white tw-w-full tw-m-4 tw-text-left tw-rounded-lg tw-shadow-md tw-h-576px tw-flex tw-flex-col tw-justify-between`}
             >
                 <CardContent className="tw-flex tw-flex-col tw-p-0">
                     <div className="tw-relative tw-w-full tw- tw-h-40 tw-rounded-lg tw-flex tw-justify-end tw-items-start">
@@ -135,10 +134,10 @@ const ProjectsGridItem = ({
                                     previewImage
                                         ? previewImage
                                         : event?.coverImage?.publicId
-                                        ? event?.coverImage.publicId
-                                        : event?.logo?.publicId
-                                        ? event?.logo.publicId
-                                        : false
+                                            ? event?.coverImage.publicId
+                                            : event?.logo?.publicId
+                                                ? event?.logo.publicId
+                                                : false
                                 }
                                 defaultImage={require('assets/images/default_cover_image.png')}
                             />
@@ -154,7 +153,7 @@ const ProjectsGridItem = ({
                                 variant="body1"
                                 component="p"
                             >
-                                {project.name}
+                                {_.truncate(project.name, { length: 20 })}
                             </Typography>
                             <div className="tw-flex tw-gap-1">
                                 {project.challenges.map((challenge, index) => (
@@ -164,24 +163,24 @@ const ProjectsGridItem = ({
                                     />
                                 ))}
                             </div>
-                            <Typography variant="body1" component="p">
-                                {_.truncate(project.punchline, { length: 50 })}
-                            </Typography>
+                            {/* <Typography variant="body1" component="p">
+                                {_.truncate(project.punchline, { length: 30 })}
+                            </Typography> */}
                         </div>
                         {showTableLocation && project.location && (
-                            <div className="tw-flex tw-flex-col tw-gap-2">
+                            <div className="tw-flex tw-gap-2">
                                 <Typography
                                     style={{ fontWeight: 'bold' }}
                                     variant="body1"
                                 >
-                                    Table Location
+                                    Table Location:
                                 </Typography>
                                 <Typography variant="body1">
                                     {project.location}
                                 </Typography>
                             </div>
                         )}
-                        {score !== null && (
+                        {showScore && (
                             <div className="tw-flex tw-flex-col tw-gap-2">
                                 <div className="tw-flex tw-gap-2">
                                     <Typography
@@ -195,9 +194,11 @@ const ProjectsGridItem = ({
                                         {score}
                                     </Typography>
                                 </div>
-                                <Typography variant="body1">
-                                    {_.truncate(message, { length: 20 })}
-                                </Typography>
+                                {showReviewers && (
+                                    <Typography variant="body1">
+                                        {_.truncate(message, { length: 20 })}
+                                    </Typography>
+                                )}
                             </div>
                         )}
                     </div>
@@ -223,25 +224,23 @@ const ProjectsGridItem = ({
                             </Button>
                         )}
                     </div>
-                    {showReviewers && project?.reviewers?.length > 0 && (
+                    {showReviewers && (
                         <div className="tw-flex tw-gap-1 tw-w-full">
-                            {project?.score && project.score > 0 && (
+                            {project.score > 0 && (
                                 <Tooltip title="Reviewed by Organizer">
                                     <Avatar>O</Avatar>
                                 </Tooltip>
                             )}
-                            {project.reviewers.map((reviewer, index) => {
+                            {project?.reviewers?.map((reviewer, index) => {
                                 if (index === reviewIndexLimit) {
                                     return (
                                         <Tooltip
                                             key={index}
-                                            title={`Reviewed by ${
-                                                project.reviewers.length - 1
-                                            } more ${
-                                                project.reviewers.length - 1 > 1
+                                            title={`Reviewed by ${project.reviewers.length - 1
+                                                } more ${project.reviewers.length - 1 > 1
                                                     ? 'people'
                                                     : 'person'
-                                            }`}
+                                                }`}
                                         >
                                             <Avatar>
                                                 +{project.reviewers.length - 1}
@@ -254,11 +253,10 @@ const ProjectsGridItem = ({
                                 return (
                                     <Tooltip
                                         key={index}
-                                        title={`Reviewed by ${
-                                            reviewer?.userFirstname
-                                                ? reviewer.userFirstname
-                                                : 'judge'
-                                        }`}
+                                        title={`Reviewed by ${reviewer?.userFirstname
+                                            ? reviewer.userFirstname
+                                            : 'judge'
+                                            }`}
                                     >
                                         {reviewer?.avatar ? (
                                             <Avatar src={reviewer.avatar} />
@@ -266,8 +264,8 @@ const ProjectsGridItem = ({
                                             <Avatar>
                                                 {reviewer?.userFirstname
                                                     ? reviewer?.userFirstname.charAt(
-                                                          0,
-                                                      )
+                                                        0,
+                                                    )
                                                     : 'R'}
                                             </Avatar>
                                         )}
@@ -282,13 +280,6 @@ const ProjectsGridItem = ({
                 <ProjectReviewModal
                     open={openReviewModal}
                     onClose={() => setOpenReviewModal(false)}
-                    score={{
-                        score: 10,
-                        averageScore: 6,
-                        maxScore: 10,
-                        message: 'Something here',
-                        status: 'evaluated',
-                    }}
                     projectScoreData={project}
                 />
             )}

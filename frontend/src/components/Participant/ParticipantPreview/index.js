@@ -7,6 +7,7 @@ import Profile from 'components/Participant/Profile'
 import { set } from 'react-ga'
 import { useDispatch } from 'react-redux'
 import * as DashboardActions from 'redux/dashboard/actions'
+import { gradientRandomizer } from 'utils/stylingHelpers'
 
 export default ({ viewMode = 'card', userData = {}, enabledView = false }) => {
     const [userProfile, setUserProfile] = useState(userData)
@@ -73,9 +74,11 @@ export default ({ viewMode = 'card', userData = {}, enabledView = false }) => {
             <div
                 className={`tw-flex tw-justify-between tw-rounded-lg ${styling.borderStyle} ${styling.alignment}`}
             >
-                <div className="tw-flex tw-gap-4">
+                <div className="tw-flex tw-gap-4 tw-items-end">
                     <div
-                        className={`tw-bg-gradient-to-r tw-from-teal-400 tw-to-blue-500 tw-rounded-full ${styling.imageSize} tw-bg-cover`}
+                        className={`tw-bg-gradient-to-r ${gradientRandomizer()} tw-rounded-full ${
+                            styling.imageSize
+                        } tw-bg-cover`}
                         style={styling?.userProfile}
                     ></div>
                     <div className="tw-flex tw-flex-col tw-items-start tw-gap-2">
@@ -92,7 +95,13 @@ export default ({ viewMode = 'card', userData = {}, enabledView = false }) => {
                             variant="h6"
                             component="h6"
                         >
-                            {userProfile.profile.headline}
+                            {viewMode === 'card' &&
+                            userProfile?.profile?.headline?.length > 20
+                                ? `${userProfile.profile.headline.substr(
+                                      0,
+                                      20,
+                                  )}...`
+                                : userProfile?.profile?.headline}
                         </Typography>
                     </div>
                 </div>
