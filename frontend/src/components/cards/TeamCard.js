@@ -27,6 +27,9 @@ function TeamCard({
     if (onClick) {
         styling.cardHover = 'tw-cursor-pointer hover:tw-shadow-lg'
     }
+    if (teamData === undefined) {
+        return null
+    }
 
     return (
         <Card
@@ -54,40 +57,41 @@ function TeamCard({
                                     variant="body1"
                                     component="p"
                                 >
-                                    {teamData.ideaTitle}
+                                    {teamData?.ideaTitle}
                                 </Typography>
                             </div>
                             <div className="tw-flex tw-gap-2">
                                 <Typography variant="body1" component="p">
                                     {stringShortener(
-                                        teamData.ideaDescription,
+                                        teamData?.ideaDescription,
                                         30,
                                     )}
                                 </Typography>
                             </div>
                         </div>
                     )}
-                    {teamData?.teamRoles.length > 0 &&
-                    teamData?.ideaTitle.length > 20 &&
-                    teamData?.ideaDescription.length > 20 ? (
-                        <Button
-                            color="outlined_button"
-                            variant="jOutlinedBox"
-                            onClick={onClickApply}
-                        >
-                            <div className="tw-flex tw-flex-col tw-gap-2 tw-items-start tw-w-full">
-                                <Typography
-                                    className="tw-font-semibold tw-text-left"
-                                    variant="body1"
-                                    component="p"
-                                >
-                                    Roles available
-                                </Typography>
-                            </div>
-                        </Button>
-                    ) : (
-                        <TeamRoles teamRoles={teamData.teamRoles} />
-                    )}
+                    {
+                        teamData?.teamRoles?.length > 0 &&
+                            teamData?.ideaTitle?.length > 20 &&
+                            teamData?.ideaDescription?.length > 20 ? (
+                            <Button
+                                color="outlined_button"
+                                variant="jOutlinedBox"
+                                onClick={onClickApply}
+                            >
+                                <div className="tw-flex tw-flex-col tw-gap-2 tw-items-start tw-w-full">
+                                    <Typography
+                                        className="tw-font-semibold tw-text-left"
+                                        variant="body1"
+                                        component="p"
+                                    >
+                                        Roles available
+                                    </Typography>
+                                </div>
+                            </Button>
+                        ) : (
+                            <TeamRoles teamRoles={teamData?.teamRoles} />
+                        )}
                 </div>
             </CardContent>
             <CardActions className="tw-flex tw-justify-end tw-items-center tw-px-4 tw-pb-4 tw-pt-0">
