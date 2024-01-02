@@ -34,11 +34,18 @@ export default () => {
 
     const handleBegin = useCallback(async () => {
         setLoading(true)
-        const error = await dispatch(DashboardActions.beginVoting(event.slug))
-        if (error) {
+        try {
+            dispatch(DashboardActions.beginVoting(event.slug))
+        } catch (err) {
             dispatch(SnackbarActions.error('Oops, something went wrong...'))
+        } finally {
+            setLoading(false)
         }
-        setLoading(false)
+
+        // if (error) {
+        //     dispatch(SnackbarActions.error('Oops, something went wrong...'))
+        // }
+        // setLoading(false)
     }, [dispatch, event.slug])
 
     return (

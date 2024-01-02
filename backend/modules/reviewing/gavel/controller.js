@@ -92,6 +92,7 @@ controller.editAnnotator = async (annotatorId, data) => {
 }
 
 controller.initAnnotator = async (event, userId) => {
+    console.log('THIS JUST STARTED HERE >>>>>')
     if (!EventHelpers.isVotingOpen(event, moment)) {
         return Promise.reject(
             new ForbiddenError('Cannot start voting while voting is not open'),
@@ -100,14 +101,19 @@ controller.initAnnotator = async (event, userId) => {
     const team = await TeamController.getTeam(event._id, userId).catch(
         () => null,
     )
+    console.log('Fetched team >>>>', team)
+
     const [projects, annotators] = await Promise.all([
         mongoose.model('Project').find({ event: event._id, status: 'final' }),
         GavelAnnotator.find({ event: event._id }),
     ])
+
+    console.log('Fetched Projects >>>>', projects)
+    console.log('Fetched annotators', annotators)
     const ownProject = team
         ? _.find(projects, project => project.team === team._id)
         : null
-
+    console.log('Own project', ownProject)
     /** If the event is using tracks, figure out the track that needs reviewers the most */
     let assignedTrack
     if (event.tracksEnabled && event.tracks && event.tracks.length > 0) {

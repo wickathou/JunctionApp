@@ -134,6 +134,11 @@ GavelAnnotatorSchema.methods.canVote = async function () {
 
 /** Get the preferred candidates for a next project for the annotator */
 GavelAnnotatorSchema.methods.getPreferredProjects = async function () {
+    console.log('Running getPreferredProjects >>>>>>>>>>>>>>>')
+    console.log(
+        'This is THIS at reviewing/gavel/annotator >>>>>>>>>>>>>>>',
+        this,
+    )
     const event = await Event.findById(this.event)
 
     const projectsConditions = {
@@ -149,12 +154,17 @@ GavelAnnotatorSchema.methods.getPreferredProjects = async function () {
     if (this.track) {
         projectsConditions.track = this.track
     }
-    const availableProjectsQuery = mongoose
+    console.log('projectsConditions >>>>>>>', projectsConditions)
+    console.log(
+        'test query >>>>>>>',
+        await mongoose.model('GavelProject').find(),
+    )
+    const availableProjectsQuery = await mongoose
         .model('GavelProject')
         .find(projectsConditions)
         .lean()
 
-    const activeAnnotatorsQuery = mongoose
+    const activeAnnotatorsQuery = await mongoose
         .model('GavelAnnotator')
         .find({
             active: true,
@@ -168,10 +178,16 @@ GavelAnnotatorSchema.methods.getPreferredProjects = async function () {
         })
         .lean()
 
+    console.log('availableProjectsQuery >>>>>>>', availableProjectsQuery)
+    console.log('activeAnnotatorsQuery >>>>>>>', activeAnnotatorsQuery)
+
     const [allProjects, activeAnnotators] = await Promise.all([
         availableProjectsQuery,
         activeAnnotatorsQuery,
     ])
+
+    console.log('allProjects >>>>>>>', allProjects)
+    console.log('activeAnnotators >>>>>>>', activeAnnotators)
 
     // Helper function
     const asyncFilter = async (arr, predicate) => {

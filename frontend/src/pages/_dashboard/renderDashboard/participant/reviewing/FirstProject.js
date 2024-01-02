@@ -22,6 +22,7 @@ import ProjectDetail from 'components/projects/ProjectDetail'
 import GavelService from 'services/reviewing/gavel'
 
 export default ({ projectId }) => {
+    console.log('rendering FirstProject.js')
     const dispatch = useDispatch()
     const event = useSelector(DashboardSelectors.event)
     const idToken = useSelector(AuthSelectors.getIdToken)
@@ -61,10 +62,13 @@ export default ({ projectId }) => {
                     'Oops, something went wrong... Please reload the page',
                 ),
             )
+        } finally {
+            setLoading(false)
         }
     }, [dispatch, event.slug])
 
     useEffect(() => {
+        console.log('fetching project with useEffect from FirstProject.js')
         fetchProject()
     }, [fetchProject])
 

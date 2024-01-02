@@ -33,11 +33,14 @@ router.route('/:slug/projects').get(
         return res.status(200).json(projects)
     }),
 )
-
+//TODO check if repeated route causes issues
 router.route('/:slug/annotators').get(
     hasToken,
     isEventOrganiser,
     asyncHandler(async (req, res) => {
+        console.log(
+            'getting annotators for event <<<<< at gave/routes.js ln 41',
+        )
         const annotators = await GavelController.getAnnotatorsForEvent(
             req.event._id,
         )
@@ -76,6 +79,9 @@ router
         hasToken,
         hasRegisteredToEvent,
         asyncHandler(async (req, res) => {
+            console.log(
+                'getting annotators for user <<<<< at gave/routes.js ln 80',
+            )
             const annotator = await GavelController.getAnnotator(
                 req.event,
                 req.user.sub,

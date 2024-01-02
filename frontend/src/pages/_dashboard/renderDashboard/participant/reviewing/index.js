@@ -24,6 +24,7 @@ export default () => {
     const annotatorLoading = useSelector(DashboardSelectors.annotatorLoading)
 
     useEffect(() => {
+        console.log('Updating annotator from reviewing/index.js')
         dispatch(DashboardActions.updateAnnotator(event.slug))
     }, [event.slug, dispatch])
 
