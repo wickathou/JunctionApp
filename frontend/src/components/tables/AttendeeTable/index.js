@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom'
 import { Box } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import StatusBadge from 'components/generic/StatusBadge'
+import { Skeleton } from '@material-ui/lab'
 import Tag from 'components/generic/Tag'
 
 import * as OrganiserSelectors from 'redux/organiser/selectors'
@@ -19,6 +20,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 import { Table, Filters, Sorters } from 'components/generic/_Table'
 import { CSVLink } from 'react-csv'
+import { debugGroup } from 'utils/debuggingTools'
+import _ from 'lodash'
 
 export default ({
     emptyRenderer,
@@ -73,20 +76,20 @@ export default ({
         [dispatch],
     )
     // TODO move somewhere else
-    function flattenObject(ob) {
-        var toReturn = {}
-        for (var i in ob) {
-            if (!ob.hasOwnProperty(i)) continue
+    function flattenObject(target) {
+        let toReturn = {}
+        for (let i in target) {
+            if (!target.hasOwnProperty(i)) continue
 
-            if (typeof ob[i] == 'object' && ob[i] !== null) {
-                var flatObject = flattenObject(ob[i])
-                for (var x in flatObject) {
+            if (_.isObject(target[i])) {
+                let flatObject = flattenObject(target[i])
+                for (let x in flatObject) {
                     if (!flatObject.hasOwnProperty(x)) continue
 
                     toReturn[i + '.' + x] = flatObject[x]
                 }
             } else {
-                toReturn[i] = ob[i]
+                toReturn[i] = target[i]
             }
         }
         return toReturn
@@ -132,7 +135,7 @@ export default ({
             }
         })
     }, [attendees, teams])
-    console.log("attendeesWithTeam",attendeesWithTeam)
+    console.log('attendeesWithTeam', attendeesWithTeam)
     const columns = useMemo(() => {
         return [
             {
@@ -173,8 +176,7 @@ export default ({
                 accessor: 'user',
                 ...Filters.MultipleSelect,
                 ...Sorters.Alphabetic,
-                Cell: ({ cell: { value } }) =>
-                    value.split('|')[0]
+                Cell: ({ cell: { value } }) => value.split('|')[0],
             },
             {
                 Header: 'Rating',
@@ -259,6 +261,7 @@ export default ({
                 userIds={selected.map(s => s.original.user)}
             />
             <Table
+                loading={loading}
                 data={attendeesWithTeam}
                 columns={columns}
                 onRowClick={openSingleEdit}
@@ -281,9 +284,46 @@ export default ({
                                     textDecoration: 'none',
                                     color: 'inherit',
                                 }}
-                                data={selected.map(item =>
-                                    flattenObject(item.original),
-                                )}
+                                data={selected.map(item => {
+                                    console.log(
+                                        'item.original>>>>>',
+                                        item.original,
+                                    )
+                                    console.log(
+                                        'Item with omit >>>>>',
+                                        _.omit(item.original.answers, '_id'),
+                                    )
+                                    console.log(
+                                        'Item with omit and then flattenObject >>>>>',
+                                        flattenObject(
+                                            _.omit(
+                                                item.original.answers,
+                                                '_id',
+                                            ),
+                                        ),
+                                    )
+                                    debugGroup('Formatted data', {
+                                        createdAt: item.original.createdAt,
+                                        registrationsAnswers: JSON.stringify(
+                                            _.flatten(
+                                                _.omit(
+                                                    item.original.answers,
+                                                    '_id',
+                                                ),
+                                            ),
+                                        ),
+                                        flatObjectBase: flattenObject(
+                                            item.original,
+                                        ),
+                                        flatProperty: flattenObject(
+                                            _.omit(
+                                                item.original.answers,
+                                                '_id',
+                                            ),
+                                        ),
+                                    })
+                                    return flattenObject(item.original)
+                                })}
                                 filename="export.csv"
                             >
                                 Export registrations

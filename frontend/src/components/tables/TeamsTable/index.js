@@ -11,7 +11,6 @@ import BulkEditRegistrationModal from 'components/modals/BulkEditRegistrationMod
 import BulkEmailModal from 'components/modals/BulkEmailModal'
 import EditTeamModal from 'components/modals/EditTeamModal'
 
-
 import { Table, Sorters } from 'components/generic/_Table'
 import AttendeeTable from '../AttendeeTable'
 import * as AuthSelectors from 'redux/auth/selectors'
@@ -115,8 +114,6 @@ export default ({ loading, teams = [], simplifiedView = false }) => {
         }, [])
     }, [teamsFiltered])
 
-
-
     const columns = useMemo(() => {
         return [
             {
@@ -188,7 +185,9 @@ export default ({ loading, teams = [], simplifiedView = false }) => {
         <Grid container spacing={2}>
             <EditTeamModal
                 teamCode={
-                    activeModal === 'editTeam' ? searchParams.get('code') : undefined
+                    activeModal === 'editTeam'
+                        ? searchParams.get('code')
+                        : undefined
                 }
                 onClose={resetSearch}
             />
@@ -289,6 +288,7 @@ export default ({ loading, teams = [], simplifiedView = false }) => {
 
             <Grid item xs={12}>
                 <Table
+                    loading={loading}
                     data={teamsFiltered}
                     columns={columns}
                     renderExpanded={row => (
@@ -310,9 +310,7 @@ export default ({ loading, teams = [], simplifiedView = false }) => {
                             key: 'edit-team',
                             label: 'Edit team',
                             action: rows => {
-
                                 openSingleTeamEdit(rows[0])
-
                             },
                         },
                     ]}

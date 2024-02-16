@@ -43,18 +43,18 @@ export default () => {
                         label: 'Assigned to you',
                         component: AssignedTab,
                     },
-                    // {
-                    //     path: '/travel',
-                    //     key: 'travel',
-                    //     label: 'Travel',
-                    //     component: TravelTab,
-                    // },
                     {
                         path: '/admin',
                         key: 'admin',
                         label: 'Admin & Tools',
                         component: AdminTab,
                     },
+                    // {
+                    //     path: '/travel',
+                    //     key: 'travel',
+                    //     label: 'Travel',
+                    //     component: TravelTab,
+                    // },
                 ]}
             />
         </PageWrapper>

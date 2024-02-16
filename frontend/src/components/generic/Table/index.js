@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react'
+// TODO delete this table component as it is not used
 
 import { makeStyles } from '@material-ui/core/styles'
 import {

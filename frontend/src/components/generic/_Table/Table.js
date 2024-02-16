@@ -28,6 +28,7 @@ import Pagination from './Pagination'
 import ActionBar from './ActionBar'
 import FilterFunctions from './filterFunctions'
 import { Filters, Sorters } from './index'
+import TableSkeleton from 'components/Skeletons/TableSkeleton'
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
@@ -93,6 +94,7 @@ const _Table = ({
     enableSelection,
     enableExport,
     renderExpanded,
+    loading,
 }) => {
     const classes = useStyles({ onRowClick })
     const defaultColumn = React.useMemo(
@@ -210,7 +212,9 @@ const _Table = ({
         return result
     }, [columns.length, enableSelection])
 
-    if (isEmpty) {
+    if (loading) {
+        return <TableSkeleton />
+    } else if (isEmpty) {
         return <Empty isEmpty />
     } else {
         return (
@@ -319,11 +323,12 @@ const _Table = ({
 _Table.defaultProps = {
     data: [],
     columns: [],
-    onRowClick: () => { },
+    onRowClick: () => {},
     bulkActions: [],
     enableExport: true,
     enablePagination: true,
     enableSelection: true,
+    loading: false,
 }
 
 export default _Table
