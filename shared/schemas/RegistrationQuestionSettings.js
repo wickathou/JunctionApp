@@ -12,7 +12,7 @@ module.exports = {
         name: 'RegistrationQuestionSettings',
         fields: {
             options: {
-                type: GraphQLList(GraphQLString),
+                type: new GraphQLList(GraphQLString),
             },
             default: {
                 type: GraphQLBoolean,
@@ -21,7 +21,7 @@ module.exports = {
                 type: GraphQLInt,
             },
             allowedTypes: {
-                type: GraphQLList(GraphQLString),
+                type: new GraphQLList(GraphQLString),
             },
         },
     }),
@@ -29,7 +29,7 @@ module.exports = {
         name: 'RegistrationQuestionSettingsInput',
         fields: {
             options: {
-                type: GraphQLList(GraphQLString),
+                type: new GraphQLList(GraphQLString),
             },
             default: {
                 type: GraphQLBoolean,
@@ -38,7 +38,7 @@ module.exports = {
                 type: GraphQLInt,
             },
             allowedTypes: {
-                type: GraphQLList(GraphQLString),
+                type: new GraphQLList(GraphQLString),
             },
         },
     }),

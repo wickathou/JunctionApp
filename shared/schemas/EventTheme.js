@@ -52,31 +52,31 @@ const EventThemeInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         headerBackgroundColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         headerTextColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         bodyBackgroundColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         detailsBackgroundColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         detailsTextColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         sidebarBackgroundColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         sidebarTextColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         accentColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         linkColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
 })
@@ -85,31 +85,31 @@ const EventThemeType = new GraphQLObjectType({
     name: 'EventTheme',
     fields: {
         headerBackgroundColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         headerTextColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         bodyBackgroundColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         detailsBackgroundColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         detailsTextColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         sidebarBackgroundColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         sidebarTextColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         accentColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         linkColor: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
 })

@@ -37,7 +37,7 @@ const HackerpackType = new GraphQLObjectType({
             type: GraphQLString,
         },
         slug: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         description: {
             type: GraphQLString,
@@ -58,13 +58,13 @@ const HackerpackInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         partner: {
             type: GraphQLString,
         },
         slug: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         description: {
             type: GraphQLString,

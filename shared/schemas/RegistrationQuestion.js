@@ -87,10 +87,10 @@ const RegistrationQuestionType = new GraphQLObjectType({
     name: 'RegistrationQuestion',
     fields: {
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         label: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         hint: {
             type: GraphQLString,
@@ -99,7 +99,7 @@ const RegistrationQuestionType = new GraphQLObjectType({
             type: GraphQLString,
         },
         fieldType: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         fieldRequired: {
             type: GraphQLBoolean,
@@ -117,10 +117,10 @@ const RegistrationQuestionInput = new GraphQLInputObjectType({
             type: GraphQLID,
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         label: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         hint: {
             type: GraphQLString,
@@ -129,7 +129,7 @@ const RegistrationQuestionInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         fieldType: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         fieldRequired: {
             type: GraphQLBoolean,

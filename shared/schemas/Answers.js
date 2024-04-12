@@ -9,7 +9,7 @@ const mongooseFields = {
     CustomAnswers: [CustomAnswerSchema.mongoose],
 }
 const graphqlFields = {
-    CustomAnswers: { type: GraphQLList(CustomAnswerSchema.graphql) },
+    CustomAnswers: { type: new GraphQLList(CustomAnswerSchema.graphql) },
 }
 
 _.forOwn(RegistrationFields.getFields(), (value, fieldName) => {

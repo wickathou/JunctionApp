@@ -86,7 +86,7 @@ const ChallengeType = new GraphQLObjectType({
             type: GraphQLString,
         },
         slug: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         title: {
             type: GraphQLString,
@@ -134,7 +134,7 @@ const ChallengeInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         partner: {
             type: GraphQLString,
@@ -143,7 +143,7 @@ const ChallengeInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         slug: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         title: {
             type: GraphQLString,

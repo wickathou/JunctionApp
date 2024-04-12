@@ -24,13 +24,13 @@ const EventPageScriptType = new GraphQLObjectType({
     name: 'EventPageScript',
     fields: {
         page: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         script: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         approved: {
-            type: GraphQLNonNull(GraphQLBoolean),
+            type: new GraphQLNonNull(GraphQLBoolean),
         },
     },
 })
@@ -42,13 +42,13 @@ const EventPageScriptInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         page: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         script: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         approved: {
-            type: GraphQLNonNull(GraphQLBoolean),
+            type: new GraphQLNonNull(GraphQLBoolean),
         },
     },
 })

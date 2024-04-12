@@ -32,10 +32,10 @@ const CloudinaryImageInput = new GraphQLInputObjectType({
     name: 'CloudinaryImageInput',
     fields: {
         url: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         publicId: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         _id: {
             type: GraphQLString,

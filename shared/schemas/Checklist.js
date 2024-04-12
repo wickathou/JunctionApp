@@ -28,13 +28,13 @@ const ChecklistItemType = new GraphQLObjectType({
     name: 'ChecklistItem',
     fields: {
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         title: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         checked: {
-            type: GraphQLNonNull(GraphQLBoolean),
+            type: new GraphQLNonNull(GraphQLBoolean),
         },
     },
 })
@@ -46,13 +46,13 @@ const ChecklistItemInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         title: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         checked: {
-            type: GraphQLNonNull(GraphQLBoolean),
+            type: new GraphQLNonNull(GraphQLBoolean),
         },
     },
 })
@@ -60,7 +60,7 @@ const ChecklistItemInput = new GraphQLInputObjectType({
 const ChecklistType = new GraphQLObjectType({
     name: 'Checklist',
     fields: {
-        items: { type: GraphQLList(ChecklistItemType) },
+        items: { type: new GraphQLList(ChecklistItemType) },
     },
 })
 
@@ -70,7 +70,7 @@ const ChecklistInput = new GraphQLInputObjectType({
         _id: {
             type: GraphQLString,
         },
-        items: { type: GraphQLList(ChecklistItemInput) },
+        items: { type: new GraphQLList(ChecklistItemInput) },
     },
 })
 

@@ -20,13 +20,13 @@ const IBANAccountType = new GraphQLObjectType({
     name: 'IBANAccount',
     fields: {
         accountNumber: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         bankName: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         swift: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
 })

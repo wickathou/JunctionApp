@@ -25,10 +25,10 @@ const EventTimelineItemType = new GraphQLObjectType({
     name: 'EventTimelineItem',
     fields: {
         title: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         startTime: {
-            type: GraphQLNonNull(GraphQLDate),
+            type: new GraphQLNonNull(GraphQLDate),
         },
     },
 })
@@ -40,10 +40,10 @@ const EventTimelineItemInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         title: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         startTime: {
-            type: GraphQLNonNull(GraphQLDate),
+            type: new GraphQLNonNull(GraphQLDate),
         },
     },
 })
@@ -51,7 +51,7 @@ const EventTimelineItemInput = new GraphQLInputObjectType({
 const EventTimelineType = new GraphQLObjectType({
     name: 'EventTimeline',
     fields: {
-        items: { type: GraphQLList(EventTimelineItemType) },
+        items: { type: new GraphQLList(EventTimelineItemType) },
     },
 })
 
@@ -61,7 +61,7 @@ const EventTimelineInput = new GraphQLInputObjectType({
         _id: {
             type: GraphQLString,
         },
-        items: { type: GraphQLList(EventTimelineItemInput) },
+        items: { type: new GraphQLList(EventTimelineItemInput) },
     },
 })
 

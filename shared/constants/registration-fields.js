@@ -1,15 +1,8 @@
-const {
-    GraphQLDate,
-    GraphQLTime,
-    GraphQLDateTime,
-} = require('graphql-iso-date')
+const { GraphQLDate } = require('graphql-iso-date')
 
 const yup = require('yup')
 const _ = require('lodash')
 const {
-    graphql,
-    GraphQlSchema,
-    GraphQlObjectType,
     GraphQLString,
     GraphQLList,
     GraphQLNonNull,
@@ -83,7 +76,7 @@ const FieldProps = {
             required: true,
             trim: true,
         },
-        graphqlSchema: GraphQLNonNull(GraphQLString),
+        graphqlSchema: new GraphQLNonNull(GraphQLString),
         alwaysRequired: true,
         schemaConfig: {
             defaultEnable: true,
@@ -112,7 +105,7 @@ const FieldProps = {
             required: true,
             trim: true,
         },
-        graphqlSchema: GraphQLNonNull(GraphQLString),
+        graphqlSchema: new GraphQLNonNull(GraphQLString),
         alwaysRequired: true,
         schemaConfig: {
             defaultEnable: true,
@@ -140,7 +133,7 @@ const FieldProps = {
             required: true,
             trim: true,
         },
-        graphqlSchema: GraphQLNonNull(GraphQLString),
+        graphqlSchema: new GraphQLNonNull(GraphQLString),
         alwaysRequired: true,
         schemaConfig: {
             defaultEnable: true,
@@ -273,7 +266,7 @@ const FieldProps = {
                 },
             },
         ],
-        graphqlSchema: GraphQLList(GraphQLString),
+        graphqlSchema: new GraphQLList(GraphQLString),
         schemaConfig: {
             defaultEnable: false,
             defaultRequire: false,
@@ -379,7 +372,7 @@ const FieldProps = {
                 type: String,
             },
         ],
-        graphqlSchema: GraphQLList(GraphQLString),
+        graphqlSchema: new GraphQLList(GraphQLString),
         schemaConfig: {
             defaultEnable: false,
             defaultRequire: false,
@@ -428,7 +421,7 @@ const FieldProps = {
         fieldType: FieldTypes.ROLES,
         copyToUserProfile: true,
         mongooseSchema: [RoleSchema.mongoose],
-        graphqlSchema: GraphQLList(RoleSchema.graphql),
+        graphqlSchema: new GraphQLList(RoleSchema.graphql),
         schemaConfig: {
             defaultEnable: false,
             defaultRequire: false,
@@ -442,7 +435,7 @@ const FieldProps = {
         fieldType: FieldTypes.SKILLS,
         copyToUserProfile: true,
         mongooseSchema: [SkillSchema.mongoose],
-        graphqlSchema: GraphQLList(SkillSchema.graphql),
+        graphqlSchema: new GraphQLList(SkillSchema.graphql),
         schemaConfig: {
             defaultEnable: false,
             defaultRequire: false,
@@ -466,7 +459,7 @@ const FieldProps = {
                 },
             },
         ],
-        graphqlSchema: GraphQLList(GraphQLString),
+        graphqlSchema: new GraphQLList(GraphQLString),
         schemaConfig: {
             defaultEnable: false,
             defaultRequire: false,
@@ -490,7 +483,7 @@ const FieldProps = {
                 },
             },
         ],
-        graphqlSchema: GraphQLList(GraphQLString),
+        graphqlSchema: new GraphQLList(GraphQLString),
         schemaConfig: {
             defaultEnable: false,
             defaultRequire: false,
@@ -901,13 +894,13 @@ const Fields = {
             const number = yup.string().label('Phone number')
             const shape = required
                 ? {
-                    countryCode: countryCode.required(),
-                    number: number.matches(/^[0-9]{7,14}$/).required(),
-                }
+                      countryCode: countryCode.required(),
+                      number: number.matches(/^[0-9]{7,14}$/).required(),
+                  }
                 : {
-                    countryCode,
-                    number,
-                }
+                      countryCode,
+                      number,
+                  }
 
             return yup.object(shape).label(FieldProps.phoneNumber.label)
         },

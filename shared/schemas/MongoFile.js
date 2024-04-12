@@ -4,7 +4,6 @@ const {
     GraphQLString,
     GraphQLInt,
     GraphQLNonNull,
-    GraphQLBoolean,
     GraphQLInputObjectType,
 } = require('graphql')
 
@@ -24,23 +23,22 @@ const MongoFileSchema = new mongoose.Schema({
     size: {
         type: Number,
     },
-
 })
 
 const MongoFile = new GraphQLObjectType({
     name: 'MongoFile',
     fields: {
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         uploadData: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         type: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         size: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: new GraphQLNonNull(GraphQLInt),
         },
     },
 })
@@ -52,16 +50,16 @@ const MongoFileInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         uploadData: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         type: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         size: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: new GraphQLNonNull(GraphQLInt),
         },
     },
 })
@@ -71,6 +69,3 @@ module.exports = {
     graphql: MongoFile,
     graphqlInput: MongoFileInput,
 }
-
-
-

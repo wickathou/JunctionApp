@@ -37,30 +37,30 @@ const MeetingRoomType = new GraphQLObjectType({
     name: 'MeetingRoom',
     fields: {
         _id: {
-            type: GraphQLNonNull(GraphQLID),
+            type: new GraphQLNonNull(GraphQLID),
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         capacity: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: new GraphQLNonNull(GraphQLInt),
         },
         timeSlots: {
-            type: GraphQLList(
+            type: new GraphQLList(
                 new GraphQLObjectType({
                     name: 'MeetingRoomTimeSlot',
                     fields: {
                         _id: {
-                            type: GraphQLNonNull(GraphQLID),
+                            type: new GraphQLNonNull(GraphQLID),
                         },
                         start: {
-                            type: GraphQLNonNull(GraphQLDate),
+                            type: new GraphQLNonNull(GraphQLDate),
                         },
                         end: {
-                            type: GraphQLNonNull(GraphQLDate),
+                            type: new GraphQLNonNull(GraphQLDate),
                         },
                         reserved: {
-                            type: GraphQLNonNull(GraphQLBoolean),
+                            type: new GraphQLNonNull(GraphQLBoolean),
                         },
                     },
                 }),
@@ -76,13 +76,13 @@ const MeetingRoomInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         capacity: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: new GraphQLNonNull(GraphQLInt),
         },
         timeSlots: {
-            type: GraphQLList(
+            type: new GraphQLList(
                 new GraphQLInputObjectType({
                     name: 'MeetingRoomTimeSlotInput',
                     fields: {
@@ -90,13 +90,13 @@ const MeetingRoomInput = new GraphQLInputObjectType({
                             type: GraphQLString,
                         },
                         start: {
-                            type: GraphQLNonNull(GraphQLDate),
+                            type: new GraphQLNonNull(GraphQLDate),
                         },
                         end: {
-                            type: GraphQLNonNull(GraphQLDate),
+                            type: new GraphQLNonNull(GraphQLDate),
                         },
                         reserved: {
-                            type: GraphQLNonNull(GraphQLBoolean),
+                            type: new GraphQLNonNull(GraphQLBoolean),
                         },
                     },
                 }),

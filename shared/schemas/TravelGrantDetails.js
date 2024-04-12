@@ -59,19 +59,19 @@ const TravelGrantDetailsType = new GraphQLObjectType({
     name: 'TravelGrantDetails',
     fields: {
         legalName: {
-            type: GraphQLNonNull(LegalNameSchema.graphql),
+            type: new GraphQLNonNull(LegalNameSchema.graphql),
         },
         email: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         gender: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         dateOfBirth: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         address: {
-            type: GraphQLNonNull(AddressSchema.graphql),
+            type: new GraphQLNonNull(AddressSchema.graphql),
         },
         hasSSN: {
             type: GraphQLBoolean,
@@ -89,7 +89,7 @@ const TravelGrantDetailsType = new GraphQLObjectType({
             type: CloudinaryImageSchema.graphql,
         },
         receiptsSum: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: new GraphQLNonNull(GraphQLInt),
         },
     },
 })

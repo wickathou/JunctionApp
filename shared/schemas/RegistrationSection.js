@@ -27,10 +27,10 @@ const RegistrationSectionType = new GraphQLObjectType({
     name: 'RegistrationSection',
     fields: {
         label: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         description: {
             type: GraphQLString,
@@ -39,7 +39,7 @@ const RegistrationSectionType = new GraphQLObjectType({
             type: GraphQLString,
         },
         questions: {
-            type: GraphQLList(RegistrationQuestionSchema.graphql),
+            type: new GraphQLList(RegistrationQuestionSchema.graphql),
         },
     },
 })
@@ -51,10 +51,10 @@ const RegistrationSectionInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         label: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         name: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         description: {
             type: GraphQLString,
@@ -63,7 +63,7 @@ const RegistrationSectionInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         questions: {
-            type: GraphQLList(RegistrationQuestionSchema.graphqlInput),
+            type: new GraphQLList(RegistrationQuestionSchema.graphqlInput),
         },
     },
 })

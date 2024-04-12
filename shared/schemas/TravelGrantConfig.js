@@ -37,10 +37,10 @@ const TravelGrantConfigType = new GraphQLObjectType({
     name: 'TravelGrantConfig',
     fields: {
         enabled: {
-            type: GraphQLNonNull(GraphQLBoolean),
+            type: new GraphQLNonNull(GraphQLBoolean),
         },
         budget: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: new GraphQLNonNull(GraphQLInt),
         },
         currency: {
             type: GraphQLString,
@@ -55,10 +55,10 @@ const TravelGrantConfigInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         enabled: {
-            type: GraphQLNonNull(GraphQLBoolean),
+            type: new GraphQLNonNull(GraphQLBoolean),
         },
         budget: {
-            type: GraphQLNonNull(GraphQLInt),
+            type: new GraphQLNonNull(GraphQLInt),
         },
         currency: {
             type: GraphQLString,

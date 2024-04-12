@@ -20,13 +20,13 @@ const LegalNameType = new GraphQLObjectType({
     name: 'LegalName',
     fields: {
         firstName: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         middleName: {
             type: GraphQLString,
         },
         lastName: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
 })

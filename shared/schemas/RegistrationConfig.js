@@ -20,10 +20,10 @@ const RegistrationConfigType = new GraphQLObjectType({
     name: 'RegistrationConfig',
     fields: {
         optionalFields: {
-            type: GraphQLList(GraphQLString),
+            type: new GraphQLList(GraphQLString),
         },
         requiredFields: {
-            type: GraphQLList(GraphQLString),
+            type: new GraphQLList(GraphQLString),
         },
     },
 })
@@ -32,10 +32,10 @@ const RegistrationConfigInput = new GraphQLInputObjectType({
     name: 'RegistrationConfigInput',
     fields: {
         optionalFields: {
-            type: GraphQLList(GraphQLString),
+            type: new GraphQLList(GraphQLString),
         },
         requiredFields: {
-            type: GraphQLNonNull(GraphQLList(GraphQLString)),
+            type: new GraphQLNonNull(new GraphQLList(GraphQLString)),
         },
     },
 })

@@ -45,19 +45,19 @@ const graphqlInput = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         country: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         addressLine: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         addressLine2: {
             type: GraphQLString,
         },
         city: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         postalCode: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         venueName: {
             type: GraphQLString,
@@ -69,19 +69,19 @@ const graphqlSchema = new GraphQLObjectType({
     name: 'Address',
     fields: () => ({
         country: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         addressLine: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         addressLine2: {
             type: GraphQLString,
         },
         city: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         postalCode: {
-            type: GraphQLNonNull(GraphQLString),
+            type: new GraphQLNonNull(GraphQLString),
         },
         venueName: {
             type: GraphQLString,
