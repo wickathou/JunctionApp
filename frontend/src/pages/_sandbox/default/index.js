@@ -69,17 +69,13 @@ import {
     GitHub,
     LinkedIn,
     Brush,
-
     LocationOn,
-
     ThumbUp,
-
     Group,
     Dashboard,
     Fingerprint,
     FlightTakeoff,
     AmpStories,
-
     AssignmentOutlined,
     StarRate,
     HowToVote,
@@ -92,37 +88,23 @@ import {
     CheckCircleOutline,
     SentimentVeryDissatisfied,
     Search,
-
-
-
-
-
-
     Tune,
     Settings,
     Equalizer,
     People,
     CropFree,
     Code,
-
     Assessment,
     HighlightOff,
     Save,
     Close,
     SettingsBrightnessSharp,
-
     Block,
-
     VisibilityOff,
-
     ExpandLess,
-
     KeyboardArrowDown,
-
-
 } from '@material-ui/icons'
 import Divider from '@material-ui/core/Divider'
-
 
 import { Formik } from 'formik'
 import * as OrganiserSelectors from 'redux/organiser/selectors'
@@ -507,7 +489,6 @@ export default () => {
                                     height={40}
                                     animation="wave"
                                 />
-
                                 <Button
                                     color="outlined_button"
                                     variant="outlined"
@@ -598,12 +579,10 @@ export default () => {
                                 <ErrorOutline />
                                 Visibility
                                 <Visibility />
-
                                 Clear
                                 <Clear />
                                 Cancel
                                 <Cancel />
-
                                 Lock
                                 <Lock />
                                 Storage
@@ -617,8 +596,7 @@ export default () => {
                                 Edit
                                 <Edit />
                                 Star
-                                <Star
-                                />
+                                <Star />
                                 GitHub
                                 <GitHub />
                                 LinkedIn
@@ -681,7 +659,6 @@ export default () => {
                                 <CropFree />
                                 Code
                                 <Code />
-
                                 Assessment
                                 <Assessment />
                                 HighlightOff
@@ -700,20 +677,15 @@ export default () => {
                                 <ExpandLess />
                                 KeyboardArrowDown
                                 <KeyboardArrowDown />
-
                                 <ProjectStatusInput
                                     value={''}
-                                    onChange={() => console.log('ProjectStatusInput')
+                                    onChange={() =>
+                                        console.log('ProjectStatusInput')
                                     }
                                 />
-
                                 <BottomBar
-                                    onSubmit={
-                                        () => console.log('submit')
-                                    }
-                                    errors={
-                                        {}
-                                    }
+                                    onSubmit={() => console.log('submit')}
+                                    errors={{}}
                                     dirty={false}
                                     loading={false}
                                 />
@@ -734,32 +706,34 @@ export default () => {
                                 <TextAreaInput
                                     placeholder={'TextAreaInput'}
                                     value={''}
-                                    onChange={() => console.log('TextAreaInput')}
+                                    onChange={() =>
+                                        console.log('TextAreaInput')
+                                    }
                                     onBlur={() => console.log('TextAreaInput')}
                                 />
-                                <DateInput label={'DateInput'} value={''} onChange={() => console.log('date')} onBlur={() => console.log('date')} disableFutureYears={false} />
+                                <DateInput
+                                    label={'DateInput'}
+                                    value={''}
+                                    onChange={() => console.log('date')}
+                                    onBlur={() => console.log('date')}
+                                    disableFutureYears={false}
+                                />
                                 <DateTimeInput
                                     value={''}
-                                    onChange={() => console.log('DateTimeInput')}
+                                    onChange={() =>
+                                        console.log('DateTimeInput')
+                                    }
                                 />
                                 <MarkdownInput
                                     name={'markdown input'}
                                     value={'markdown input'}
-                                    onChange={
-                                        console.log('markdown')
-                                    }
-                                    onBlur={() =>
-                                        console.log('markdown')
-                                    }
-                                    placeholder={
-                                        "markdown input"
-                                    }
+                                    onChange={console.log('markdown')}
+                                    onBlur={() => console.log('markdown')}
+                                    placeholder={'markdown input'}
                                 />
                                 <BooleanInput
                                     value={'boolean input'}
-                                    onChange={
-                                        console.log('boolean')
-                                    }
+                                    onChange={console.log('boolean')}
                                 />
                                 <Select />
                             </CardContent>

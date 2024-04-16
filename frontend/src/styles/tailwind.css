@@ -21453,6 +21453,10 @@ Any custom css, create it here and do not make any updates to the tailwind.css f
   border-radius: 0.2rem
 }
 
+/* Create here composite classes, after you finish you must run the command 'npm run build:tailwind' to build tailwind css to see the changes on the development enviroment
+
+Any custom css, create it here and do not make any updates to the tailwind.css file, since it will be deleted every time tailwind build is executed*/
+
 @media (min-width: 640px) {
   .sm\:tw-container {
     width: 100%;
