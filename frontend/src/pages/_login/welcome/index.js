@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 
 import { useFormik } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { Typography, Box, Grid } from '@mui/material'
 
 import * as yup from 'yup'
@@ -20,92 +20,94 @@ import LightTextField from './LightTextField'
 import LightCheckbox from './LightCheckbox'
 import config from 'constants/config'
 import { useTranslation } from 'react-i18next'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
-    wrapper: {
-        position: 'fixed',
-        top: 0,
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        padding: 0,
-        display: 'flex',
-        background: 'black',
-        overflowY: 'scroll',
-    },
-    whiteCentered: {
-        color: theme.palette.theme_white.main,
-        textAlign: 'center',
-    },
-    label: {
-        color: theme.palette.theme_white.main,
-    },
-    error: {
-        color: theme.palette.error.main,
-    },
-    link: {
-        color: theme.palette.primary.main,
-    },
-    content: {
-        display: 'flex',
-        flexDirection: 'column',
-        flex: 1,
-        position: 'relative',
-        zIndex: 10,
-        minHeight: '900px',
-        [theme.breakpoints.up('lg')]: {
-            flexDirection: 'row',
-        },
-    },
-    contentLeft: {
-        zIndex: 15,
-        background: 'black',
-        display: 'flex',
-        flex: 3,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        maxHeight: '300px',
-        minHeight: '300px',
-        position: 'relative',
-        [theme.breakpoints.up('lg')]: {
-            maxHeight: 'none',
-        },
-    },
-    contentLeftBackground: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        opacity: 0.4,
-    },
-    contentLeftLogo: {
-        width: '100%',
-        maxWidth: '500px',
-        objectFit: 'contain',
-        position: 'relative',
-        zIndex: 10,
-    },
-    contentRight: {
-        background: 'linear-gradient(152deg, #111, #111 15%, #343434)',
-        flex: 2,
-        padding: theme.spacing(0, 2),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        [theme.breakpoints.up('lg')]: {
-            padding: theme.spacing(0, 3),
-            justifyContent: 'center',
-        },
-    },
-}))
+// const useStyles = styled(theme => ({
+//     wrapper: {
+//         position: 'fixed',
+//         top: 0,
+//         width: '100%',
+//         height: '100%',
+//         flex: 1,
+//         padding: 0,
+//         display: 'flex',
+//         background: 'black',
+//         overflowY: 'scroll',
+//     },
+//     whiteCentered: {
+//         color: theme.palette.theme_white.main,
+//         textAlign: 'center',
+//     },
+//     label: {
+//         color: theme.palette.theme_white.main,
+//     },
+//     error: {
+//         color: theme.palette.error.main,
+//     },
+//     link: {
+//         color: theme.palette.primary.main,
+//     },
+//     content: {
+//         display: 'flex',
+//         flexDirection: 'column',
+//         flex: 1,
+//         position: 'relative',
+//         zIndex: 10,
+//         minHeight: '900px',
+//         [theme.breakpoints.up('lg')]: {
+//             flexDirection: 'row',
+//         },
+//     },
+//     contentLeft: {
+//         zIndex: 15,
+//         background: 'black',
+//         display: 'flex',
+//         flex: 3,
+//         flexDirection: 'column',
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         maxHeight: '300px',
+//         minHeight: '300px',
+//         position: 'relative',
+//         [theme.breakpoints.up('lg')]: {
+//             maxHeight: 'none',
+//         },
+//     },
+//     contentLeftBackground: {
+//         position: 'absolute',
+//         top: 0,
+//         left: 0,
+//         width: '100%',
+//         height: '100%',
+//         objectFit: 'cover',
+//         opacity: 0.4,
+//     },
+//     contentLeftLogo: {
+//         width: '100%',
+//         maxWidth: '500px',
+//         objectFit: 'contain',
+//         position: 'relative',
+//         zIndex: 10,
+//     },
+//     contentRight: {
+//         background: 'linear-gradient(152deg, #111, #111 15%, #343434)',
+//         flex: 2,
+//         padding: theme.spacing(0, 2),
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//         justifyContent: 'flex-start',
+//         [theme.breakpoints.up('lg')]: {
+//             padding: theme.spacing(0, 3),
+//             justifyContent: 'center',
+//         },
+//     },
+// }))
 
 export default () => {
     const { t } = useTranslation()
-    const classes = useStyles()
+    // const classes = useStyles()
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const idToken = useSelector(AuthSelectors.getIdToken)
@@ -120,7 +122,8 @@ export default () => {
                     idToken,
                 )
                 dispatch(UserActions.setUserProfile(profile))
-                dispatch(AuthActions.pushNextRoute())
+                // dispatch(AuthActions.pushNextRoute())
+                navigate('/home')
             } catch (err) {
                 dispatch(
                     SnackbarActions.error(
@@ -169,33 +172,33 @@ export default () => {
         <FixedLayout
             background={require('assets/images/default_cover_image.png')}
         >
-            <div className={classes.content}>
-                <div className={classes.contentLeft}>
+            <div className={'classes.content'}>
+                <div className={'classes.contentLeft'}>
                     <img
-                        className={classes.contentLeftBackground}
+                        className={'classes.contentLeftBackground'}
                         src={require('assets/images/laser_2016.jpg')}
                         alt="illustration"
                     />
                     <img
-                        className={classes.contentLeftLogo}
+                        className={'classes.contentLeftLogo'}
                         src={config.LOGO_LIGHT_URL}
                         alt={config.PLATFORM_OWNER_NAME + ' logo'}
                     />
                 </div>
-                <div className={classes.contentRight}>
+                <div className={'classes.contentRight'}>
                     <form onSubmit={formik.handleSubmit}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
                                 <Typography
                                     variant="h4"
                                     paragraph
-                                    className={classes.whiteCentered}
+                                    className={'classes.whiteCentered'}
                                 >
                                     {t('Welcome_')}
                                 </Typography>
                                 <Typography
                                     variant="body1"
-                                    className={classes.whiteCentered}
+                                    className={'classes.whiteCentered'}
                                 >
                                     {t('Looks_like_new_')}
                                 </Typography>
@@ -289,7 +292,7 @@ export default () => {
                                             href={config.TERMS_URL}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className={classes.link}
+                                            className={'classes.link'}
                                         >
                                             Terms & Conditions
                                         </a>{' '}
@@ -298,7 +301,7 @@ export default () => {
                                             href={config.PRIVACY_URL}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className={classes.link}
+                                            className={'classes.link'}
                                         >
                                             Privacy Policy
                                         </a>

@@ -11,6 +11,7 @@ import PageWrapper from 'components/layouts/PageWrapper'
 import { useTranslation } from 'react-i18next'
 
 export default ({ events, loading = false, title }) => {
+    console.log('EVENT GRID RUNNING')
     const dispatch = useDispatch()
     const { t } = useTranslation()
     var date = new Date()

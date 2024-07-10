@@ -10,11 +10,12 @@ import {
 } from '@mui/material'
 import { sortBy } from 'lodash-es'
 import moment from 'moment'
-import MiscUtils from 'utils/misc'
+// import MiscUtils from 'utils/misc'
 import TimelineDot from 'components/generic/TimelineDot'
 import StepConnector from '@mui/material/StepConnector'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     root: {
         background: 'transparent',
     },
@@ -71,7 +72,7 @@ const colorLibStyle = props => ({
     },
 })
 
-const ColorlibConnector = withStyles(colorLibStyle())(StepConnector)
+const ColorlibConnector = styled(StepConnector)(colorLibStyle())
 
 ColorlibConnector.propTypes = {
     ...ColorlibConnector.propTypes,

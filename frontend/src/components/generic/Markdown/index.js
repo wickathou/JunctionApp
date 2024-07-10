@@ -23,148 +23,148 @@ const Markdown = React.memo(
 
         return (
             <ReactMarkdown
-                source={source}
-                plugins={[breaks]}
+                children={source}
+                // remarkPlugins={[breaks]}
                 className={wrapperClasses}
-                renderers={{
-                    heading: ({ level, children }) => {
-                        switch (level) {
-                            case 1:
-                                return (
-                                    <Typography
-                                        className="font-sans text-xl text-inherit text-justify mb-6"
-                                        variant="h1"
-                                    >
-                                        {children}
-                                    </Typography>
-                                )
-                            case 2:
-                                return (
-                                    <Typography
-                                        className="font-sans text-xl font-bold text-inherit mb-4"
-                                        variant="h2"
-                                    >
-                                        {children}
-                                    </Typography>
-                                )
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                                return (
-                                    <Typography
-                                        className="font-sans text-lg font-bold text-inherit mb-2"
-                                        variant="h3"
-                                    >
-                                        {children}
-                                    </Typography>
-                                )
-                            default:
-                                return null
-                        }
-                    },
-                    paragraph: ({ children }) => {
-                        return (
-                            <Typography
-                                variant="body1"
-                                className="mb-6 text-inherit"
-                            >
-                                {children}
-                            </Typography>
-                        )
-                    },
-                    emphasis: ({ children }) => {
-                        return (
-                            <Typography
-                                variant="body1"
-                                display="inline"
-                                className="font-bold text-inherit"
-                            >
-                                {children}
-                            </Typography>
-                        )
-                    },
-                    strong: ({ children }) => {
-                        return (
-                            <Typography
-                                variant="body1"
-                                display="inline"
-                                className="font-bold text-inherit"
-                            >
-                                {children}
-                            </Typography>
-                        )
-                    },
-                    link: props => {
-                        if (props.href.indexOf('http') === -1) {
-                            return (
-                                <Link to={props.href}>
-                                    <Typography
-                                        className="underline text-primary"
-                                        display="inline"
-                                        variant="body1"
-                                        color="primary"
-                                    >
-                                        {props.children}
-                                    </Typography>
-                                </Link>
-                            )
-                        } else {
-                            return (
-                                <ExternalLink href={props.href}>
-                                    <Typography
-                                        className="underline text-primary"
-                                        display="inline"
-                                        variant="body1"
-                                        color="primary"
-                                    >
-                                        {props.children}
-                                    </Typography>
-                                </ExternalLink>
-                            )
-                        }
-                    },
-                    linkReference: props => {
-                        if (props.href.indexOf('http') === -1) {
-                            return (
-                                <Link to={props.href}>
-                                    <Typography
-                                        className="underline text-primary"
-                                        display="inline"
-                                        component="span"
-                                        variant="body1"
-                                        color="primary"
-                                    >
-                                        {props.children}
-                                    </Typography>
-                                </Link>
-                            )
-                        } else {
-                            return (
-                                <ExternalLink href={props.href}>
-                                    <Typography
-                                        className="underline text-primary"
-                                        display="inline"
-                                        component="span"
-                                        variant="body1"
-                                        color="primary"
-                                    >
-                                        {props.children}
-                                    </Typography>
-                                </ExternalLink>
-                            )
-                        }
-                    },
-                    thematicBreak: () => {
-                        return (
-                            <>
-                                <Divider size={2} />
-                                <LineDivider />
-                                <Divider size={2} />
-                            </>
-                        )
-                    },
-                }}
+                // components={{
+                //     heading: ({ level, children }) => {
+                //         switch (level) {
+                //             case 1:
+                //                 return (
+                //                     <Typography
+                //                         className="font-sans text-xl text-inherit text-justify mb-6"
+                //                         variant="h1"
+                //                     >
+                //                         {children}
+                //                     </Typography>
+                //                 )
+                //             case 2:
+                //                 return (
+                //                     <Typography
+                //                         className="font-sans text-xl font-bold text-inherit mb-4"
+                //                         variant="h2"
+                //                     >
+                //                         {children}
+                //                     </Typography>
+                //                 )
+                //             case 3:
+                //             case 4:
+                //             case 5:
+                //             case 6:
+                //                 return (
+                //                     <Typography
+                //                         className="font-sans text-lg font-bold text-inherit mb-2"
+                //                         variant="h3"
+                //                     >
+                //                         {children}
+                //                     </Typography>
+                //                 )
+                //             default:
+                //                 return null
+                //         }
+                //     },
+                //     paragraph: ({ children }) => {
+                //         return (
+                //             <Typography
+                //                 variant="body1"
+                //                 className="mb-6 text-inherit"
+                //             >
+                //                 {children}
+                //             </Typography>
+                //         )
+                //     },
+                //     emphasis: ({ children }) => {
+                //         return (
+                //             <Typography
+                //                 variant="body1"
+                //                 display="inline"
+                //                 className="font-bold text-inherit"
+                //             >
+                //                 {children}
+                //             </Typography>
+                //         )
+                //     },
+                //     strong: ({ children }) => {
+                //         return (
+                //             <Typography
+                //                 variant="body1"
+                //                 display="inline"
+                //                 className="font-bold text-inherit"
+                //             >
+                //                 {children}
+                //             </Typography>
+                //         )
+                //     },
+                //     link: props => {
+                //         if (props.href.indexOf('http') === -1) {
+                //             return (
+                //                 <Link to={props.href}>
+                //                     <Typography
+                //                         className="underline text-primary"
+                //                         display="inline"
+                //                         variant="body1"
+                //                         color="primary"
+                //                     >
+                //                         {props.children}
+                //                     </Typography>
+                //                 </Link>
+                //             )
+                //         } else {
+                //             return (
+                //                 <ExternalLink href={props.href}>
+                //                     <Typography
+                //                         className="underline text-primary"
+                //                         display="inline"
+                //                         variant="body1"
+                //                         color="primary"
+                //                     >
+                //                         {props.children}
+                //                     </Typography>
+                //                 </ExternalLink>
+                //             )
+                //         }
+                //     },
+                //     linkReference: props => {
+                //         if (props.href.indexOf('http') === -1) {
+                //             return (
+                //                 <Link to={props.href}>
+                //                     <Typography
+                //                         className="underline text-primary"
+                //                         display="inline"
+                //                         component="span"
+                //                         variant="body1"
+                //                         color="primary"
+                //                     >
+                //                         {props.children}
+                //                     </Typography>
+                //                 </Link>
+                //             )
+                //         } else {
+                //             return (
+                //                 <ExternalLink href={props.href}>
+                //                     <Typography
+                //                         className="underline text-primary"
+                //                         display="inline"
+                //                         component="span"
+                //                         variant="body1"
+                //                         color="primary"
+                //                     >
+                //                         {props.children}
+                //                     </Typography>
+                //                 </ExternalLink>
+                //             )
+                //         }
+                //     },
+                //     thematicBreak: () => {
+                //         return (
+                //             <>
+                //                 <Divider size={2} />
+                //                 <LineDivider />
+                //                 <Divider size={2} />
+                //             </>
+                //         )
+                //     },
+                // }}
             />
         )
     },

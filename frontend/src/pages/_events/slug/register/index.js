@@ -47,8 +47,9 @@ import EventDetailContext from '../context'
 import { useTranslation } from 'react-i18next'
 import EventPageScriptIFrame from 'components/events/EventPageScriptIFrame'
 import { EventPageScripts } from '@hackjunction/shared'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     wrapper: {
         position: 'absolute',
         top: 0,

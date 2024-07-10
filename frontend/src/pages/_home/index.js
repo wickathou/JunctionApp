@@ -21,15 +21,16 @@ import Image from 'components/generic/Image'
 import PageWrapper from 'components/layouts/PageWrapper'
 
 import EventsGrid from './EventsGrid'
+// import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        background: theme.palette.theme_white.main, //`linear-gradient(to right bottom, ${theme.palette.secondary.contrastText}, ${theme.palette.success.contrastText}, ${theme.palette.primary.contrastText})`,
+// const useStyles = styled(theme => ({
+//     root: {
+//         background: theme.palette.theme_white.main, //`linear-gradient(to right bottom, ${theme.palette.secondary.contrastText}, ${theme.palette.success.contrastText}, ${theme.palette.primary.contrastText})`,
 
-        //'linear-gradient(to bottom right, blue, pink)',
-        //`linearGradient(${theme.palette.primary}, ${theme.palette.secondary})`,
-    },
-}))
+//         //'linear-gradient(to bottom right, blue, pink)',
+//         //`linearGradient(${theme.palette.primary}, ${theme.palette.secondary})`,
+//     },
+// }))
 
 export default () => {
     //TODO these shouldn't be queried. Events and organizations should be in the state
@@ -37,12 +38,13 @@ export default () => {
     const [pastEvents] = usePastEvents({ limit: 3 })
     const dispatch = useDispatch()
     const { t } = useTranslation()
-    const classes = useStyles()
+    // const classes = useStyles()
     console.log('activeEvents', activeEvents)
 
     return (
         <PageWrapper header={() => <GlobalNavBar />} footer={() => <Footer />}>
-            <div className={classes.root}>
+            {/* <div className={classes.root}> */}
+            <div>
                 <Helmet>
                     <title>{config.PLATFORM_OWNER_NAME}</title>
                     <meta

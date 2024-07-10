@@ -90,12 +90,12 @@ const TabNavigation = ({ tabs, location, baseRoute, transparent = false }) => {
             </Tabs>
             <Box mt={3} p={2}>
                 <Routes>
-                    {tabs.map(({ key, path, component }) => (
+                    {tabs.map(({ key, path, component: Component }) => (
                         <Route
                             key={key}
                             exact={true}
-                            path={`${baseRoute}${path}`}
-                            element={component}
+                            path={`${path}`}
+                            element={<Component />}
                         />
                     ))}
                 </Routes>

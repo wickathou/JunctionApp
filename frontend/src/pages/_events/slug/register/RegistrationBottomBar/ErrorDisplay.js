@@ -5,8 +5,9 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import MiscUtils from 'utils/misc'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     errorButton: ({ hasErrors }) => ({
         transition: 'all 0.2s ease',
         marginRight: theme.spacing(1),

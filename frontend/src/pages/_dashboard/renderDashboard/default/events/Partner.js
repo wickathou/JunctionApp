@@ -63,14 +63,18 @@ export default () => {
                                     buttons={[
                                         <Button
                                             size="small"
-                                            onClick={() =>
-                                                dispatch(
-                                                    push(
-                                                        '/events/' +
-                                                            registration.event
-                                                                .slug,
-                                                    ),
-                                                )
+                                            onClick={
+                                                () =>
+                                                    console.log(
+                                                        'See more clicked',
+                                                    )
+                                                // dispatch(
+                                                //     push(
+                                                //         '/events/' +
+                                                //             registration.event
+                                                //                 .slug,
+                                                //     ),
+                                                // )
                                             }
                                         >
                                             {t('See_more_')}
@@ -88,11 +92,11 @@ export default () => {
                                                         'partner',
                                                     ),
                                                 )
-                                                dispatch(
-                                                    push(
-                                                        `/dashboard/event/${registration.event?.slug}`,
-                                                    ),
-                                                )
+                                                // dispatch(
+                                                //     push(
+                                                //         `/dashboard/event/${registration.event?.slug}`,
+                                                //     ),
+                                                // )
                                             }}
                                         >
                                             {t('Dashboard_')}

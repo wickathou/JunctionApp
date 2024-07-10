@@ -7,40 +7,42 @@ import JunctionTheme from 'junctionTheme.js'
 import Button from 'components/generic/Button'
 import UserAvatar from 'components/UserAvatar'
 import { useMyProfilePreview } from 'graphql/queries/userProfile'
+import { styled } from '@mui/system'
+import { useNavigate } from 'react-router-dom'
 
 import { useTranslation } from 'react-i18next'
 
-const useStyles = makeStyles(theme => ({
-    avatar: {
-        marginLeft: '16px',
-    },
-    menuBox: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '5px',
-        margin: '30px',
-        backgroundColor: 'white',
-        border: 'solid',
-        borderColor: theme.palette.primary.main,
-        '&:hover': {
-            backgroundColor: theme.palette.primary.light,
-        },
-    },
-    menuItem: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-}))
+// const useStyles = styled(theme => ({
+//     avatar: {
+//         marginLeft: '16px',
+//     },
+//     menuBox: {
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         padding: '5px',
+//         margin: '30px',
+//         backgroundColor: 'white',
+//         border: 'solid',
+//         borderColor: theme.palette.primary.main,
+//         '&:hover': {
+//             backgroundColor: theme.palette.primary.light,
+//         },
+//     },
+//     menuItem: {
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//     },
+// }))
 
 export default () => {
     const { t } = useTranslation()
-
+    const navigate = useNavigate()
     const idTokenPayload = useSelector(AuthSelectors.getIdTokenPayload)
     const userId = idTokenPayload?.sub
     const dispatch = useDispatch()
-    const classes = useStyles()
+    // const classes = useStyles()
 
     if (!userId) {
         return (
@@ -48,9 +50,8 @@ export default () => {
                 <Grid container spacing={0}>
                     <Grid item xs={12}>
                         <Button
-                            onClick={() => dispatch(push('/login'))}
+                            onClick={() => navigate('/login')}
                             strong={true}
-                            className={classes.menuBox}
                         >
                             {t('Sign_in_')}
                         </Button>
@@ -65,23 +66,18 @@ export default () => {
             <Grid container spacing={2} wrap="nowrap">
                 <Grid item xs={4}>
                     <Button
-                        onClick={() => dispatch(push('/dashboard/default'))}
+                        onClick={() => navigate('/dashboard/default/')}
                         strong={true}
-                        className={classes.menuBox}
                     >
                         {t('Dashboard_')}
                     </Button>
                 </Grid>
                 <Grid item xs={5}>
-                    <Button
-                        onClick={() => dispatch(push('/logout'))}
-                        strong={true}
-                        className={classes.menuBox}
-                    >
+                    <Button onClick={() => navigate('/logout')} strong={true}>
                         {t('Log_out_')}
                     </Button>
                 </Grid>
-                <Grid item xs={3} className={classes.menuItem}>
+                <Grid item xs={3}>
                     <UserAvatar />
                 </Grid>
             </Grid>

@@ -25,7 +25,7 @@ import {
 // import { Chat } from 'components/messaging/chat'
 
 export default role => {
-    const url = useResolvedPath("").pathname;
+    const url = useResolvedPath('').pathname
     const dispatch = useDispatch()
 
     const event = useSelector(DashboardSelectors.event)

@@ -14,8 +14,9 @@ import { Helmet } from 'react-helmet'
 import config from 'constants/config'
 import * as DashboardSelectors from 'reducers/dashboard/selectors'
 import { useDispatch, useSelector } from 'react-redux'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     wrapper: {
         height: '100%',
         display: 'flex',

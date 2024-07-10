@@ -2,8 +2,9 @@ import React from 'react'
 
 import { Box, Typography, Button } from '@mui/material'
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     wrapper: ({ active, completed, isVisible }) => ({
         transition: 'all 0.25s ease',
         opacity: !active && !completed ? 0 : 1,

@@ -27,31 +27,31 @@ import * as SnackbarActions from 'reducers/snackbar/actions'
 
 import { useTranslation } from 'react-i18next'
 import { debugGroup } from 'utils/debuggingTools'
-const useStyles = makeStyles(theme => ({
-    topWrapper: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        background: 'white',
-        borderRadius: '7px',
-        boxShadow: '2px 7px 15px rgba(0, 0, 0, 0.12)',
-        padding: theme.spacing(3),
-        [theme.breakpoints.up('md')]: {
-            flexDirection: 'row',
-            alignItems: 'flex-start',
-        },
-    },
-    box: {
-        background: 'white',
-        borderRadius: '7px',
-        boxShadow: '2px 7px 30px rgba(0, 0, 0, 0.12)',
-        padding: theme.spacing(3),
-    },
-    imageUpload: {
-        width: '300px',
-        height: '300px',
-    },
-}))
+// const useStyles = makeStyles(theme => ({
+//     topWrapper: {
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//         background: 'white',
+//         borderRadius: '7px',
+//         boxShadow: '2px 7px 15px rgba(0, 0, 0, 0.12)',
+//         padding: theme.spacing(3),
+//         [theme.breakpoints.up('md')]: {
+//             flexDirection: 'row',
+//             alignItems: 'flex-start',
+//         },
+//     },
+//     box: {
+//         background: 'white',
+//         borderRadius: '7px',
+//         boxShadow: '2px 7px 30px rgba(0, 0, 0, 0.12)',
+//         padding: theme.spacing(3),
+//     },
+//     imageUpload: {
+//         width: '300px',
+//         height: '300px',
+//     },
+// }))
 
 export default () => {
     debugGroup('Profile page')
@@ -62,7 +62,7 @@ export default () => {
     const loading = userProfileLoading || !hasProfile
     const { t } = useTranslation()
 
-    const classes = useStyles()
+    // const classes = useStyles()
 
     const validationSchema = useCallback(data => {
         console.log('data on validation', data)
@@ -117,7 +117,7 @@ export default () => {
             >
                 {formikProps => (
                     <>
-                        <Box className={classes.topWrapper}>
+                        <Box className={'classes.topWrapper'}>
                             <Box width="300px" height="300px" margin={3}>
                                 <FastField
                                     name="avatar"
@@ -300,7 +300,7 @@ export default () => {
                                 </Grid>
                             </Box>
                         </Box>
-                        <Box className={classes.box} mt={3}>
+                        <Box className={'classes.box'} mt={3}>
                             <Typography variant="h6">
                                 {t('Profile_details_')}
                             </Typography>
@@ -505,7 +505,7 @@ export default () => {
                                 </Grid>
                             </Grid>
                         </Box>
-                        <Box className={classes.box} mt={3}>
+                        <Box className={'classes.box'} mt={3}>
                             <Typography variant="h6">
                                 {t('Education_')}
                             </Typography>
@@ -531,7 +531,7 @@ export default () => {
                                 )}
                             />
                         </Box>
-                        <Box className={classes.box} mt={3}>
+                        <Box className={'classes.box'} mt={3}>
                             <Typography variant="h6">{t('Skills_')}</Typography>
                             <Typography variant="body1" gutterBottom>
                                 {t('Enter_skills_')}
@@ -551,7 +551,7 @@ export default () => {
                                 )}
                             />
                         </Box>
-                        <Box className={classes.box} mt={3}>
+                        <Box className={'classes.box'} mt={3}>
                             <Typography variant="h6">
                                 {t('Pro_roles_')}
                             </Typography>
@@ -573,7 +573,7 @@ export default () => {
                                 )}
                             />
                         </Box>
-                        <Box className={classes.box} mt={3}>
+                        <Box className={'classes.box'} mt={3}>
                             <Typography variant="h6">
                                 {t('Recruitment_pref_')}
                             </Typography>
@@ -596,7 +596,7 @@ export default () => {
                                 )}
                             />
                         </Box>
-                        <Box className={classes.box} mt={3}>
+                        <Box className={'classes.box'} mt={3}>
                             <Typography variant="h6">
                                 {t('Additional_links_')}
                             </Typography>

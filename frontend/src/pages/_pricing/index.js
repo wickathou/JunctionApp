@@ -15,8 +15,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     backButtonWrapper: {
         position: 'absolute',
         zIndex: 10,

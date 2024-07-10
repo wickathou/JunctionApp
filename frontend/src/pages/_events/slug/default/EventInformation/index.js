@@ -1,10 +1,11 @@
 import React from 'react'
 import { Grid, Typography, Box } from '@mui/material'
 import moment from 'moment'
+import { styled } from '@mui/system'
 
 import EventButtons from '../EventButtons'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     root: {
         color: '#19DDEA',
         padding: '25px 0 0 0',

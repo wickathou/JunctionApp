@@ -14,8 +14,9 @@ import RegistrationQuestion from '../RegistrationQuestion'
 import RegistrationBottomBar from '../RegistrationBottomBar'
 
 import EventDetailContext from '../../context'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     wrapper: {
         backgroundColor: 'transparent',
         padding: 0,

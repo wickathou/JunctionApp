@@ -1,3 +1,5 @@
+// TO DELETE
+
 import React from 'react'
 
 import { Box, Typography } from '@mui/material'

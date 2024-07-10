@@ -64,11 +64,11 @@ export default () => {
                                                 'participant',
                                             ),
                                         ) //TODO: make this a schema
-                                        dispatch(
-                                            push(
-                                                `/dashboard/event/${event?.slug}`,
-                                            ),
-                                        )
+                                        // dispatch(
+                                        //     push(
+                                        //         `/dashboard/event/${event?.slug}`,
+                                        //     ),
+                                        // )
                                     }}
                                 />
                             </Grid>
@@ -95,6 +95,7 @@ export default () => {
                                 const eventStarted = isodate > event.startTime
                                 return (
                                     <NewEventCard
+                                        key={event.slug}
                                         event={event}
                                         buttons={[
                                             <Button
@@ -162,6 +163,7 @@ export default () => {
                             return (
                                 <NewEventCard
                                     event={event}
+                                    key={event.slug}
                                     buttons={[
                                         <Button
                                             size="small"
@@ -205,7 +207,10 @@ export default () => {
                     <Button
                         variant="outlinedNew"
                         color="theme_lightgray"
-                        onClick={() => dispatch(push('/events'))} // TODO: Add past events page, fix the looks of this button
+                        onClick={() => {
+                            console.log('TODO: Add past events page')
+                            // dispatch(push('/events'))
+                        }} // TODO: Add past events page, fix the looks of this button
                     >
                         {t('Past_events_all_')}
                     </Button>

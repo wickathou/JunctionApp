@@ -11,12 +11,13 @@
         "@fortawesome/free-solid-svg-icons": "^5.14.0",
         "@fortawesome/react-fontawesome": "^0.1.11",
         "@hackjunction/shared": "file:../shared",
-        "@mui/icons-material": "next",
-        "@mui/lab": "next",
-        "@mui/material": "next",
+        "@mui/icons-material": "latest",
+        "@mui/lab": "latest",
+        "@mui/material": "latest",
         "@mui/x-data-grid": "^7.7.0",
         "@react-pdf/renderer": "^3.4.4",
         "@redux-devtools/extension": "^3.3.0",
+        "@reduxjs/toolkit": "^2.2.6",
         "@welldone-software/why-did-you-render": "^4.2.5",
         "antd": "^5.18.3",
         "auth0-js": "^9.13.2",
@@ -74,7 +75,7 @@
         "yup": "^0.29.1"
     },
     "scripts": {
-        "start": "node --expose-gc --max-old-space-size=8192 node_modules/react-scripts/scripts/start.js",
+        "start": "node --trace-deprecation --expose-gc --max-old-space-size=8192 node_modules/react-scripts/scripts/start.js",
         "build": "npm run build:styles && node --expose-gc --max-old-space-size=2048 node_modules/react-scripts/scripts/build.js",
         "test": "node --expose-gc --max-old-space-size=8192 node_modules/react-scripts/scripts/test.js",
         "eject": "node --expose-gc --max-old-space-size=8192 node_modules/react-scripts/scripts/eject.js",
@@ -95,7 +96,8 @@
         "npm": "10.8.0"
     },
     "devDependencies": {
-        "babel-eslint": "^10.1.0",
+        "@babel/core": "^7.24.7",
+        "@babel/eslint-parser": "^7.24.7",
         "depcheck": "^1.4.7",
         "eslint": "^8",
         "eslint-config-prettier": "^9.1.0",

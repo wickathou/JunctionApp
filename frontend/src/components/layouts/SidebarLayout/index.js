@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { findIndex } from 'lodash-es'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useNavigate, Link } from 'react-router-dom'
 
 import Container from 'components/generic/Container/index'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -34,12 +34,19 @@ export default React.memo(
         location,
         routes: _routes,
     }) => {
+        console.log('SidebarLayout')
+        console.log('topContent', topContent)
+        console.log('sidebarTopContent', sidebarTopContent)
+        console.log('baseRoute', baseRoute)
+        console.log('location', location)
+        console.log('routes', _routes)
         const dispatch = useDispatch()
         const routes = _routes.filter(route => !route.hidden)
+        const navigate = useNavigate()
 
         const activeIndex = useMemo(() => {
             const relativePath = location.pathname.replace(baseRoute, '')
-            var idx = findIndex(routes, item => {
+            let idx = findIndex(routes, item => {
                 if (item.exact) {
                     return relativePath === item.path
                 } else {
@@ -72,16 +79,17 @@ export default React.memo(
 
         const pushRoute = useCallback(
             path => {
-                dispatch(push(`${baseRoute}${path}`))
+                // dispatch(push(`${baseRoute}${path}`))
+                navigate(`${baseRoute}${path}`)
             },
             [baseRoute, dispatch],
         )
 
-        useEffect(() => {
-            if (activeIndex === -1) {
-                //pushRoute(routes[0].path)
-            }
-        }, [routes, activeIndex, pushRoute])
+        // useEffect(() => {
+        //     if (activeIndex === -1) {
+        //         pushRoute(routes[0].path)
+        //     }
+        // }, [routes, activeIndex, pushRoute])
 
         useEffect(() => {
             setMobileOpen(false)
@@ -103,7 +111,8 @@ export default React.memo(
         const drawerContent = (
             <>
                 <Box>
-                    <a href="/home">
+                    {/* <a href="/home"> */}
+                    <Link to="/home">
                         <img
                             src={
                                 PlatformLogo /*config.LOGO_LIGHT_URL TODO: switch this to cloudinary*/
@@ -111,7 +120,8 @@ export default React.memo(
                             className="block mx-auto p-1.5 h-18"
                             alt={config.PLATFORM_OWNER_NAME + ' logo'}
                         />
-                    </a>
+                    </Link>
+                    {/* </a> */}
                 </Box>
                 <Box p={2}>{sidebarTopContent}</Box>
                 <List>
@@ -201,7 +211,7 @@ export default React.memo(
                                     ? 'text-white'
                                     : 'text-gray-400'
                             }`}
-                            onClick={() => dispatch(push('/logout'))}
+                            onClick={() => navigate('/logout')}
                         >
                             <ListItemIcon className="text-inherit">
                                 <ExitToAppIcon />
@@ -218,7 +228,7 @@ export default React.memo(
 
         return (
             <div>
-                <Hidden mdUp implementation="css">
+                {/* <Hidden mdUp implementation="css">
                     <IconButton
                         variant="roundedBlack"
                         onClick={handleDrawerToggle}
@@ -276,7 +286,7 @@ export default React.memo(
                             {drawerContent}
                         </Drawer>
                     </nav>
-                </Hidden>
+                </Hidden> */}
                 <main
                     className={`flex-grow relative transition-all ${
                         desktopOpen ? 'ml-[300px]' : 'ml-0'
@@ -285,6 +295,7 @@ export default React.memo(
                     {topContent}
                     <Container className="p-0 md:p-8">
                         <div className="p-8 max-w-[1400px]">
+                            <p>TEST LOADING SPACE</p>
                             <Routes>
                                 {routes.map(
                                     (
@@ -292,7 +303,7 @@ export default React.memo(
                                             key,
                                             path,
                                             hidden,
-                                            component,
+                                            component: Component,
                                             exact = false,
                                             locked,
                                         },
@@ -306,7 +317,7 @@ export default React.memo(
                                                     key={key}
                                                     exact={exact}
                                                     path={`${baseRoute}${path}`}
-                                                    component={component}
+                                                    element={<Component />}
                                                 />
                                             )
                                         }
@@ -316,23 +327,26 @@ export default React.memo(
                                 <Route
                                     key={'profile'}
                                     exact={true}
-                                    path={`${baseRoute}/profile`}
-                                    component={ProfilePage}
+                                    path={`profile`}
+                                    element={<ProfilePage />}
                                 />
-                                <Route
+                                {/* <Route
                                     key={'logout'}
                                     exact={true}
                                     path={`${baseRoute}/logout`}
-                                />
+                                /> */}
                                 <Route
                                     key={'events'}
                                     exact={false}
-                                    path={`${baseRoute}/events`}
-                                    component={EventsPage}
+                                    path={`events/*`}
+                                    element={<EventsPage />}
                                 />
-
-                                <Navigate to={`${baseRoute}/events`} />
+                                <Route
+                                    path="*"
+                                    element={<Navigate to="events" replace />}
+                                />
                             </Routes>
+                            {/* <Navigate to={`${baseRoute}/events`} /> */}
                         </div>
                     </Container>
                 </main>

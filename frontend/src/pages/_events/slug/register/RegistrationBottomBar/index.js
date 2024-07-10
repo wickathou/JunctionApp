@@ -9,8 +9,9 @@ import ErrorDisplay from './ErrorDisplay'
 import BlockExitIfDirty from 'components/inputs/BlockExitIfDirty'
 import Button from 'components/generic/Button'
 import { useTranslation } from 'react-i18next'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     wrapper: {
         position: 'fixed',
         bottom: 0,

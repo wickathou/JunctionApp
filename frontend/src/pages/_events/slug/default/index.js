@@ -21,8 +21,9 @@ import EventDetailContext from '../context'
 import EventPageScriptIFrame from 'components/events/EventPageScriptIFrame'
 import { EventPageScripts } from '@hackjunction/shared'
 import EventButtons from './EventButtons'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles({
+const useStyles = styled({
     header: {
         background: props => props.headerBackgroundColor,
         color: props => props.headerTextColor,

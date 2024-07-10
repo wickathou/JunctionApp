@@ -21,8 +21,9 @@ import EmailService from 'services/email'
 import Shared from '@hackjunction/shared'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from 'react-helmet'
+import { styled } from '@mui/system'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     wrapper: {
         height: '100%',
         display: 'flex',
