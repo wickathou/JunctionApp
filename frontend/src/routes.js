@@ -11,7 +11,7 @@ import LoginPage from './pages/_login'
 // import HackerpackPage from './pages/_hackerpack'
 // import PricingPage from './pages/_pricing'
 // import EventsRouter from './pages/_events'
-// import ContactPage from './pages/_contact'
+import ContactPage from './pages/_contact'
 import RequiresPermission from './hocs/RequiresPermission'
 // import RequiresRole from 'hocs/RequiresRole'
 
@@ -35,42 +35,34 @@ const routes = [
     {
         path: '/',
         element: <DefaultPage />,
-        exact: true,
     },
     {
         path: '/home',
         element: <HomePage />,
-        exact: false,
     },
     // {
     //     path: '/events',
     //     element: <EventsRouter />,
-    //     exact: false,
     // },
     {
-        path: '/login',
+        path: '/login/*',
         element: <LoginPage />,
-        exact: false,
     },
-    // {
-    //     path: '/contact',
-    //     component: ContactPage,
-    //     exact: false,
-    // },
+    {
+        path: '/contact',
+        element: <ContactPage />,
+    },
     {
         path: '/error',
         element: <ErrorPage />,
-        exact: false,
     },
     {
         path: '/callback',
         element: <CallbackPage />,
-        exact: false,
     },
     {
         path: '/logout',
         element: <LogoutPage />,
-        exact: false,
     },
     // {
     //     path: '/organise',
@@ -78,61 +70,51 @@ const routes = [
     //     /*component: RequiresPermission(OrganiserRouter, [
     //         AuthConstants.Permissions.MANAGE_EVENT,
     //         ]),*/
-    //     exact: false,
     // },
     {
         //default after login
         path: '/dashboard/*',
         // element: <DashboardRouter />,
         element: <RequiresPermission ComposedComponent={DashboardRouter} />,
-        exact: false,
     },
     // {
     //     path: '/account',
     //     component: RequiresPermission(AccountRouter),
-    //     exact: false,
     // },
     // {
     //     path: '/recruitment',
     //     component: RequiresPermission(RecruitmentRouter, [
     //         AuthConstants.Permissions.ACCESS_RECRUITMENT,
     //     ]),
-    //     exact: false,
     // },
     // {
     //     path: '/projects',
     //     component: ProjectsRouter,
-    //     exact: false,
     // },
     // {
     //     path: '/hackerpack',
     //     component: HackerpackPage,
-    //     exact: false,
     // },
 
     // {
     //     path: '/pricing',
     //     component: PricingPage,
-    //     exact: false,
     // },
     // {
     //     path: '/admin',
     //     component: RequiresRole(AdminRouter, [AuthConstants.Roles.SUPER_ADMIN]),
-    //     exact: false,
     // },
     // {
     //     path: '/sandbox',
     //     component: RequiresRole(SandboxRouter, [
     //         AuthConstants.Roles.SUPER_ADMIN,
     //     ]),
-    //     exact: false,
     // },
     // {
     //     path: '/files',
     //     component: RequiresRole(SandboxRouter, [
     //         AuthConstants.Roles.SUPER_ADMIN,
     //     ]),
-    //     exact: false,
     // },
 ]
 

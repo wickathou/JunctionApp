@@ -21,6 +21,7 @@ import Image from 'components/generic/Image'
 import PageWrapper from 'components/layouts/PageWrapper'
 
 import EventsGrid from './EventsGrid'
+import { useNavigate } from 'react-router-dom'
 // import { styled } from '@mui/system'
 
 // const useStyles = styled(theme => ({
@@ -37,6 +38,7 @@ export default () => {
     const [activeEvents] = useActiveEvents({ limit: 3 })
     const [pastEvents] = usePastEvents({ limit: 3 })
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { t } = useTranslation()
     // const classes = useStyles()
     console.log('activeEvents', activeEvents)
@@ -97,7 +99,7 @@ export default () => {
                         <Button
                             variant="outlinedNew"
                             color="theme_lightgray"
-                            onClick={() => dispatch(push('/events'))} // TODO: Add past events page
+                            onClick={() => navigate('/events')} // TODO: Add past events page
                         >
                             {t('Past_events_all_')}
                         </Button>
@@ -123,7 +125,7 @@ export default () => {
                             color="theme_lightgray"
                             variant="outlinedNew"
                             strong
-                            onClick={() => dispatch(push('/contact'))}
+                            onClick={() => navigate('/contact')}
                         >
                             {t('Contact_us_')}
                         </Button>
@@ -131,7 +133,7 @@ export default () => {
                             color="theme_lightgray"
                             variant="outlinedNew"
                             strong
-                            onClick={() => dispatch(push('/pricing'))}
+                            onClick={() => navigate('/pricing')}
                         >
                             {t('Pricing_')}
                         </Button>
@@ -171,7 +173,8 @@ export default () => {
                         </ExternalLink>
                     </Typography>
                 </Container>
-                <Divider size={20} />
+
+                {/* <Divider size={20} />
                 <Container center>
                     <Typography variant="h4" align="center">
                         {t('Join_hackerpack_')}
@@ -180,18 +183,11 @@ export default () => {
                         color="theme_lightgray"
                         variant="outlinedNew"
                         strong
-                        onClick={() => dispatch(push('/hackerpack'))}
+                        onClick={() => navigate('/hackerpack')}
                     >
                         {t('To_hackerpack_')}
                     </Button>
-                </Container>
-                <Divider size={20} />
-                <Container center>
-                    <img
-                        src="https://i.imgur.com/R7pG4Ln.png"
-                        style={{ width: '10em' }}
-                    />
-                </Container>
+                </Container> */}
             </div>
         </PageWrapper>
     )

@@ -16,7 +16,6 @@ import * as SnackbarActions from 'reducers/snackbar/actions'
 // import HomePage from './pages/_home/index'
 
 export default ({ location }) => {
-    console.log('START TEST >>>>>>>>>>>>>>>>>>>>>> App.js')
     const dispatch = useDispatch()
     const idToken = useSelector(AuthSelectors.getIdToken)
     const isAuthenticated = useSelector(AuthSelectors.isAuthenticated)
@@ -51,8 +50,6 @@ export default ({ location }) => {
             }
         }
     }, [dispatch, isAuthenticated, isSessionExpired])
-    console.log('Routes:', routeConfig.routes)
-    console.log('END TEST >>>>>>>>>>>>>>>>>>>>>> App.js')
 
     return (
         <ApolloProvider

@@ -8,7 +8,7 @@ import Button from 'components/generic/Button'
 import UserAvatar from 'components/UserAvatar'
 import { useMyProfilePreview } from 'graphql/queries/userProfile'
 import { styled } from '@mui/system'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { useTranslation } from 'react-i18next'
 
@@ -39,6 +39,7 @@ import { useTranslation } from 'react-i18next'
 export default () => {
     const { t } = useTranslation()
     const navigate = useNavigate()
+    const location = useLocation()
     const idTokenPayload = useSelector(AuthSelectors.getIdTokenPayload)
     const userId = idTokenPayload?.sub
     const dispatch = useDispatch()
@@ -50,7 +51,11 @@ export default () => {
                 <Grid container spacing={0}>
                     <Grid item xs={12}>
                         <Button
-                            onClick={() => navigate('/login')}
+                            onClick={() =>
+                                navigate('/login', {
+                                    state: { nextRoute: location.pathname },
+                                })
+                            }
                             strong={true}
                         >
                             {t('Sign_in_')}

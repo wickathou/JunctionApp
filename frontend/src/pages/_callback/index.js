@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -17,52 +17,51 @@ export default () => {
     const dispatch = useDispatch()
 
     const idToken = useSelector(AuthSelectors.getIdToken)
+    const nextRoute = useSelector(AuthSelectors.getNextRoute)
 
-    const getOrCreateProfile = useCallback(async () => {
+    const getOrCreateProfile = async idToken => {
+        try {
+            const userProfile = await dispatch(
+                UserActions.updateUserProfile(idToken),
+            )
+            if (!userProfile) {
+                // dispatch(push('/login/welcome'))
+                navigate('/login/welcome', { state: { nextRoute } })
+            } else {
+                // dispatch(AuthActions.pushNextRoute())
+                // navigate('/home')
+                navigate(nextRoute || '/home')
+            }
+        } catch (err) {
+            console.error('Error getting user profile', err)
+            if (err?.response?.status === 404) {
+                // dispatch(push('/login/welcome'))
+                navigate('/login/welcome', { state: { nextRoute } })
+            } else {
+                // dispatch(push('/error', { error: 'Login failed' }))
+                navigate('/error', { state: { err } })
+            }
+        }
+    }
+
+    const handleAuthentication = async () => {
+        try {
+            await dispatch(AuthActions.handleAuthentication())
+            AnalyticsService.events.LOG_IN()
+        } catch (err) {
+            console.error('Login error', err)
+            // dispatch(push('/error', { error: err.message }))
+            navigate('/error', { state: { err } })
+        }
+    }
+
+    useEffect(() => {
         if (idToken) {
-            try {
-                const userProfile = await dispatch(
-                    UserActions.updateUserProfile(idToken),
-                )
-                if (!userProfile) {
-                    // dispatch(push('/login/welcome'))
-                    navigate('/login/welcome')
-                } else {
-                    // dispatch(AuthActions.pushNextRoute())
-                    navigate('/home')
-                }
-            } catch (err) {
-                console.error('Error getting user profile', err)
-                if (err?.response?.status === 404) {
-                    // dispatch(push('/login/welcome'))
-                    navigate('/login/welcome')
-                } else {
-                    // dispatch(push('/error', { error: 'Login failed' }))
-                    navigate('/error', { error: 'Login failed' })
-                }
-            }
+            getOrCreateProfile(idToken)
+        } else if (/access_token|id_token|error/.test(location.hash)) {
+            handleAuthentication()
         }
-    }, [idToken, dispatch])
-
-    const handleAuthentication = useCallback(async () => {
-        if (/access_token|id_token|error/.test(location.hash)) {
-            try {
-                await dispatch(AuthActions.handleAuthentication())
-                AnalyticsService.events.LOG_IN()
-            } catch (err) {
-                console.error('Login error', err)
-                dispatch(push('/error', { error: err.message }))
-            }
-        }
-    }, [dispatch, location])
-
-    useEffect(() => {
-        handleAuthentication()
-    }, [handleAuthentication])
-
-    useEffect(() => {
-        getOrCreateProfile()
-    }, [getOrCreateProfile])
+    }, [idToken])
 
     return <LoadingOverlay text="Signing in" />
 }

@@ -2,25 +2,25 @@ import React, { useCallback } from 'react'
 
 import { useFormik } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { Typography, Box, Grid } from '@mui/material'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Typography, Box, Grid, Checkbox, TextField } from '@mui/material'
 
 import * as yup from 'yup'
 
 import * as AuthSelectors from 'reducers/auth/selectors'
 import * as UserActions from 'reducers/user/actions'
-import * as AuthActions from 'reducers/auth/actions'
+// import * as AuthActions from 'reducers/auth/actions'
 import * as SnackbarActions from 'reducers/snackbar/actions'
 
 import Button from 'components/generic/Button'
 import UserProfilesService from 'services/userProfiles'
 
 import FixedLayout from 'components/layouts/FixedLayout'
-import LightTextField from './LightTextField'
-import LightCheckbox from './LightCheckbox'
+// import LightTextField from './LightTextField'
+// import LightCheckbox from './LightCheckbox'
 import config from 'constants/config'
 import { useTranslation } from 'react-i18next'
-import { styled } from '@mui/system'
+// import { styled } from '@mui/system'
 
 // const useStyles = styled(theme => ({
 //     wrapper: {
@@ -108,34 +108,31 @@ export default () => {
     const { t } = useTranslation()
     // const classes = useStyles()
     const navigate = useNavigate()
+    const location = useLocation()
     const dispatch = useDispatch()
-
     const idToken = useSelector(AuthSelectors.getIdToken)
     const idTokenData = useSelector(AuthSelectors.idTokenData)
 
-    const handleSubmit = useCallback(
-        async (data, actions) => {
-            actions.setSubmitting(true)
-            try {
-                const profile = await UserProfilesService.createUserProfile(
-                    data,
-                    idToken,
-                )
-                dispatch(UserActions.setUserProfile(profile))
-                // dispatch(AuthActions.pushNextRoute())
-                navigate('/home')
-            } catch (err) {
-                dispatch(
-                    SnackbarActions.error(
-                        'Something went wrong... Please try again',
-                    ),
-                )
-            }
-            actions.setSubmitting(false)
-            return
-        },
-        [dispatch, idToken],
-    )
+    const handleSubmit = async (data, actions) => {
+        actions.setSubmitting(true)
+        try {
+            const profile = await UserProfilesService.createUserProfile(
+                data,
+                idToken,
+            )
+            dispatch(UserActions.setUserProfile(profile))
+            const nextRoute = location?.state?.nextRoute ?? '/'
+            navigate(nextRoute)
+        } catch (err) {
+            dispatch(
+                SnackbarActions.error(
+                    'Something went wrong... Please try again',
+                ),
+            )
+        }
+        actions.setSubmitting(false)
+        return
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -204,7 +201,7 @@ export default () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <LightTextField
+                                <TextField
                                     value={formik.values.firstName}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -223,7 +220,7 @@ export default () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <LightTextField
+                                <TextField
                                     value={formik.values.lastName}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -242,7 +239,7 @@ export default () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <LightTextField
+                                <TextField
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
                                     fullWidth
@@ -268,7 +265,7 @@ export default () => {
                                 flexDirection="row"
                                 alignItems="center"
                             >
-                                <LightCheckbox
+                                <Checkbox
                                     name="accepted"
                                     checked={formik.values.accepted}
                                     onChange={(e, value) =>

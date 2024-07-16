@@ -1,11 +1,12 @@
 import React from 'react'
 
 import UserMenu from 'components/UserMenu'
-import Button from 'components/generic/Button'
+// import Button from 'components/generic/Button'
 
 import config from 'constants/config'
 import PlatformLogo from 'assets/logos/JO_wordmark_black.png'
-import WavePattern from 'assets/images/nawbar_waves.svg'
+// import WavePattern from 'assets/images/nawbar_waves.svg'
+import { Link } from 'react-router-dom'
 // import { styled } from '@mui/system'
 
 // const useStyles = styled(theme => ({
@@ -41,12 +42,12 @@ export default () => {
         >
             <div>
                 <div>
-                    <a href="/home">
+                    <Link to="/home">
                         <img
                             src={PlatformLogo}
                             alt={config.PLATFORM_OWNER_NAME + ' logo'}
                         />
-                    </a>
+                    </Link>
                     <UserMenu />
                 </div>
             </div>

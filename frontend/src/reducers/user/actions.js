@@ -34,7 +34,6 @@ export const updateUserProfile = idToken => async dispatch => {
     } else {
         dispatch(setUserProfile(null))
     }
-
     return userProfile
 }
 
@@ -68,11 +67,11 @@ export const setAccessRight = (accessRight, eventId) => dispatch => {
     })
 }
 
-export const organizerEvents = (organizerEvents) => dispatch => {
+export const organizerEvents = organizerEvents => dispatch => {
     dispatch({
         type: ActionTypes.ORGANIZER_EVENTS,
         payload: {
-            organizerEvents
+            organizerEvents,
         },
     })
 }
