@@ -11,7 +11,6 @@ import * as yup from 'yup'
 import React from 'react'
 import Button from 'components/generic/Button'
 import { Typography } from '@material-ui/core'
-import { debugGroup } from 'utils/debuggingTools'
 import { useTranslation } from 'react-i18next'
 
 export default ({
@@ -134,13 +133,6 @@ export default ({
 
     const formMode =
         initialData && Object.keys(initialData).length > 0 ? 'Edit' : 'Create'
-
-    debugGroup('Prop data', [
-        initialData,
-        formikSubmitAction,
-        onBack,
-        challengeOptions,
-    ])
 
     if (Array.isArray(challengeOptions) && challengeOptions.length > 0) {
         TeamSchema.challenge = yup.string().required('A challenge is required')

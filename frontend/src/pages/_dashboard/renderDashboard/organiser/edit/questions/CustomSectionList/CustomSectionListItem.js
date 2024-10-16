@@ -19,7 +19,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import Empty from 'components/generic/Empty'
 import { now } from 'moment'
-import { debugGroup } from 'utils/debuggingTools'
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
@@ -43,7 +42,6 @@ export default ({
     index,
     projectsExist = false,
 }) => {
-    debugGroup('Custom section')
     const { t } = useTranslation()
     const classes = useStyles()
     const questions = section.questions || []
