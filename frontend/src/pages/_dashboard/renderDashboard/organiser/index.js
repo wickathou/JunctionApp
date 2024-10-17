@@ -110,7 +110,7 @@ export default () => {
                     // TODO make one of the routes default or create a default route to render, instead of the events page
                     {
                         key: 'edit',
-                        path: '',
+                        path: '/edit',
                         icon: <TuneIcon />,
                         label: t('Edit_event_'),
                         component: EditPage,
