@@ -100,7 +100,7 @@ export default () => {
                                             </Button>,
 
                                             <Button
-                                                id={`dashboard-event-${event.slug}`}
+                                                id={`partner-dashboard-event-${event.slug}`}
                                                 size="small"
                                                 onClick={() => {
                                                     console.log(
