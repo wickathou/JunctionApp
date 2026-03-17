@@ -1,0 +1,67 @@
+# This file is used to build the infrastructure for a deployment.
+# After editing something here, apply the changes on the Diploi dashboard.
+# For more information, see https://diploi.com/yaml
+
+diploiVersion: v1.0
+components:
+  - hosts:
+      - port: 2222
+        endpoint: true
+        name: Backend
+        identifier: app
+    name: Backend
+    identifier: backend
+    folder: /backend
+    package: https://github.com/diploi/component-nodejs#v24.13.0
+    containerCommands:
+      productionStart: npm start
+      developmentStart: npm run dev
+    env:
+      include:
+        - mongo.*
+        - redis.*
+        - value: '2222'
+          name: PORT
+        - value: production
+          name: NODE_ENV
+        - value: Junction
+          name: PLATFORM_OWNER_NAME
+        - value: noreply@hackjunction.com
+          name: SENDGRID_FROM_EMAIL
+        - value: Junction
+          name: SENDGRID_FROM_NAME
+        - value: https://hackjunction.com/calendar
+          name: CALENDAR_URL
+        - value: https://eu.junctionplatform.com/
+          name: ID_TOKEN_NAMESPACE
+  - hosts:
+      - port: 3000
+        endpoint: true
+        name: Frontend
+        identifier: app
+    name: Frontend
+    identifier: frontend
+    folder: /frontend
+    package: https://github.com/diploi/component-nodejs#v24.13.0
+    containerCommands:
+      productionStart: npm run build
+      developmentStart: npm start
+    env:
+      include:
+        - redis.*
+        - mongo.*
+        - value: http://localhost:2222
+          name: REACT_APP_BASE_URL
+        - value: https://eu.junctionplatform.com/
+          name: REACT_APP_ID_TOKEN_NAMESPACE
+        - value: Junction
+          name: REACT_APP_PLATFORM_OWNER_NAME
+        - value: https://hackjunction.com/calendar
+          name: REACT_APP_CALENDAR_URL
+addons:
+  - name: MongoDB
+    identifier: mongo
+    package: https://github.com/diploi/addon-mongo#v8.2.3
+  - name: Redis
+    identifier: redis
+    package: https://github.com/diploi/addon-redis#main
